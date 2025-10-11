@@ -1,0 +1,10 @@
+*.7z
+*.exe
+*.key
+*.log
+*.json
+*.o
+*.out
+*.pkl
+*.tmp
+__pycache__

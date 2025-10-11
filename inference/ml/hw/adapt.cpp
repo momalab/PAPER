@@ -1,0 +1,10 @@
+#include "adapt.h"
+
+#include "auxiliary.cpp"
+#include "add.cpp"
+#include "avgpool.cpp"
+#include "batchnorm.cpp"
+#include "conv.cpp"
+#include "linear.cpp"
+#include "poly.cpp"
+#include "polyskip.cpp"
