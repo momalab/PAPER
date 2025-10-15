@@ -1,6 +1,6 @@
 ROOT=$(abspath ../..)
-3P=$(ROOT)/third-party
 SRC=$(ROOT)/inference
+3P=$(SRC)/third-party
 CFG=$(SRC)/config
 ENC=$(SRC)/encode
 FHE=$(SRC)/fhe
