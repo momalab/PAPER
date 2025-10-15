@@ -12,17 +12,22 @@ It may work with older versions or other environments, but these have not been v
 
 * CMake $\ge$ 3.22.1
 
+* Git $\ge$ 2.34.1
+
 * GNU C/C++17 compiler (or newer)
 
 * GMP library $\ge$ 6.2.1
 
-* Git $\ge$ 2.34.1
+* JSON for Modern C++ `nlohmann/json` library $\ge$ 3.10.5
 
-* Python 3 with NumPY, ...
+* Python 3 $\ge$ 3.10.12
+
+* NumPY library $\ge$ 1.26.4
+
+* Pandas library $\ge$ 2.1.4
 
 ```
-sudo apt install make cmake gcc g++ libgmp-dev git python3
-...
+sudo apt install make cmake git gcc g++ libgmp-dev nlohmann-json3-dev python3 python3-numpy python3-pandas
 ```
 
 * Microsoft SEAL library 4.1. Check dependencies in https://github.com/microsoft/seal and install with
