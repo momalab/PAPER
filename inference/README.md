@@ -24,10 +24,8 @@ It may work with older versions or other environments, but these have not been v
 
 * NumPY library $\ge$ 1.26.4
 
-* Pandas library $\ge$ 2.1.4
-
 ```
-sudo apt install make cmake git gcc g++ libgmp-dev nlohmann-json3-dev python3 python3-numpy python3-pandas
+sudo apt install make cmake git gcc g++ libgmp-dev nlohmann-json3-dev python3 python3-numpy
 ```
 
 * Microsoft SEAL library 4.1. Check dependencies in https://github.com/microsoft/seal and install with
