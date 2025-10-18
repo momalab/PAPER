@@ -65,7 +65,7 @@ where `<program>` is the target program name, and `[PARAMETERS]` are optional co
 |----------------|-------------|------------------------|
 | **LIBRARY** | **mockup**, seal | adapt, naive |
 | **CONVOLUTION** | classical, map, **mapmem** | adapt |
-| **RNS** | seal, reverse, **forward** | adapt, naive |
+| **RNS** | **forward**, reverse, seal | adapt, naive |
 
 Bold options are default.
 
