@@ -67,7 +67,7 @@ where `<program>` is the target program name, and `[PARAMETERS]` are optional co
 | **CONVOLUTION** | classical, map, **mapmem** | adapt |
 | **RNS** | **forward**, reverse, seal | adapt, naive |
 
-Bold options are default.
+**Bold** options are default.
 
 ### Parameter Descriptions
 
