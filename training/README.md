@@ -378,11 +378,11 @@ python src/extract_best_models.py --dataset cifar10 --model resnet20
 
   ```
   artifacts/model_jsons/cifar10_resnet20/
-  ├── standard_accuracy.json
-  ├── full_clustering_after_polynomial_training.json
-  ├── slice_clustering_after_polynomial_training.json
-  ├── standard_ensemble.json
-  └── ensemble_ed_clustering.json
+  ├──standard_accuracy.json
+  ├──full_clustering_after_polynomial_training.json
+  ├──slice_clustering_after_polynomial_training.json
+  ├──standard_ensemble.json
+  └──ensemble_ed_clustering.json
   ```
 
 ## 2. Generate JSON Templates for C++ Integration
@@ -417,14 +417,14 @@ python src/create_all_jsons.py --dataset cifar10 --model resnet20 --workers 10
 
   ```
   artifacts/json_models/cifar10_resnet20/<source_json_name>/
-  └── <per_checkpoint_jsons>.json
+  └──<per_checkpoint_jsons>.json
   ```
 
 * Dataset templates are written under
 
   ```
   artifacts/dataset_jsons/cifar10/
-  └── <cached_file_basename>.json
+  └──<cached_file_basename>.json
   ```
 
 
