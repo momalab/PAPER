@@ -36,7 +36,7 @@ try
     // check if model and input files are provided
     if (argc < 7)
     {
-        cout << "Usage: " << argv[0] << " <model_1.json> ... <model_M.json> <input.json> <log2(N)> |N| |scale| |q0|,|q1|,...,|qL|,|P| <rotation_steps> [# iterations]" << endl;
+        cout << "Usage: " << argv[0] << " <model_1.json> ... <model_M.json> <input.json> |N| |scale| |q0|,|q1|,...,|qL|,|P| <rotation_steps> [# iterations]" << endl;
         cout << "Example: " << argv[0] << " model_1.json model_2.json input.json 15 22 1x54,1x23,18x44 1,2,4,8,16,24,31,32,64,-1,-2,-4,-8,-16,-32" << endl;
         return 1;
     }
