@@ -98,7 +98,7 @@ def run(dataset, model, method, mode, args):
         if method in ["full_clustering", "slice_clustering"]:
             nclusters = [2**i for i in (range(6,14) if m > 1 else range(0,11))]
         for k in nclusters:
-            cmd = f"{program} {'-s ' if skip_compilation else ' '}--path {args.path} --mode {mode} --dataset {dataset} --model {model} --method {method} -M {m} -K {k} --niters {niters}"
+            cmd = f"{program} {'-s ' if skip_compilation else ''}--path {args.path} --mode {mode} --dataset {dataset} --model {model} --method {method} -M {m} -K {k} --niters {niters}"
             print(cmd)
             os.system(cmd)
             skip_compilation = True
