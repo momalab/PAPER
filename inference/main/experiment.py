@@ -260,9 +260,8 @@ def run(args):
     log_memory = f"{model_path}/{logname}_memory.log"
     cmd = ["/usr/bin/time", "-v", f"./{program}.exe"]
     for model_file in model_files:
-        json_file = model_file[:-2] + "json"
-        cmd.append(f"{json_file}")
-    cmd.append(f"{dataset_file[0][:-2] + "json"}")
+        cmd.append(model_file[:-2] + "json")
+    cmd.append(dataset_file[0][:-2] + "json")
     cmd.append(logN[args.model])
     cmd.append(scale[args.model])
     cmd.append(moduli[args.model])
