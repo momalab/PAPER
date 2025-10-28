@@ -72,7 +72,7 @@ def parse_args():
 
     # Number of iterations in accuracy testing
     parser.add_argument(
-        "--niters_accuracy", "-na",
+        "--niters_accuracy", "-A",
         type=int,
         default=-1,
         help="Number of iterations/inferences to perform accuracy evaluation. If 0, run for all entries."
@@ -80,7 +80,7 @@ def parse_args():
 
     # Number of iterations in time testing
     parser.add_argument(
-        "--niters_accuracy", "-nt",
+        "--niters_time", "-T",
         type=int,
         default=-1,
         help="Number of iterations/inferences to perform during time evaluation. If 0, run for all entries."
