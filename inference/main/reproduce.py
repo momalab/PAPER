@@ -89,14 +89,14 @@ def parse_args():
     args = parser.parse_args()
 
     if args.niters_accuracy == -1:
-        args.niters = {
+        args.niters_accuracy = {
             "minimal": 100,
             "quick": 500,
             "normal": 5000
         }[args.evaluation]
 
     if args.niters_time == -1:
-        args.niters = {
+        args.niters_time = {
             "minimal": 1,
             "quick": 3,
             "normal": 5
