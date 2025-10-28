@@ -290,6 +290,7 @@ def run(args):
 
 if __name__ == "__main__":
     args = parse_args()
+    print(args)
     # print("Arguments:")
     # for key, value in vars(args).items():
     #     print(f"  {key}: {value}")

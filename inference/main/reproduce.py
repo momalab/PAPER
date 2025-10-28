@@ -70,17 +70,32 @@ def parse_args():
         help="Experiment method: {all, standard, full_clustering, slice_clustering}."
     )
 
-    # Number of iterations
+    # Number of iterations in accuracy testing
     parser.add_argument(
-        "--niters", "-n",
+        "--niters_accuracy", "-na",
         type=int,
         default=-1,
-        help="Number of iterations/inferences to perform. If 0, run for all entries."
+        help="Number of iterations/inferences to perform accuracy evaluation. If 0, run for all entries."
+    )
+
+    # Number of iterations in time testing
+    parser.add_argument(
+        "--niters_accuracy", "-nt",
+        type=int,
+        default=-1,
+        help="Number of iterations/inferences to perform during time evaluation. If 0, run for all entries."
     )
 
     args = parser.parse_args()
 
-    if args.niters == -1:
+    if args.niters_accuracy == -1:
+        args.niters = {
+            "minimal": 100,
+            "quick": 500,
+            "normal": 5000
+        }[args.evaluation]
+
+    if args.niters_time == -1:
         args.niters = {
             "minimal": 1,
             "quick": 3,
@@ -93,7 +108,7 @@ def run(dataset, model, method, mode, args):
     nmodels = [1] if method == "full_clustering" else [1, 2, 4]
     nclusters = [0]
     skip_compilation = False
-    niters = args.niters if mode == "time" else 0
+    niters = args.niters_time if mode == "time" else args.niters_accuracy
     for m in nmodels:
         if method in ["full_clustering", "slice_clustering"]:
             nclusters = [2**i for i in (range(6,14) if m > 1 else range(0,11))]
