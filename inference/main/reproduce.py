@@ -111,7 +111,7 @@ def run(dataset, model, method, mode, args):
     niters = args.niters_time if mode == "time" else args.niters_accuracy
     for m in nmodels:
         if method in ["full_clustering", "slice_clustering"]:
-            nclusters = [2**i for i in (range(6,14) if m > 1 else range(0,11))]
+            nclusters = [2**i for i in (range(6,14) if m > 1 else range(1,11))]
         for k in nclusters:
             cmd = f"{program} {'-s ' if skip_compilation else ''}--path {args.path} --mode {mode} --dataset {dataset} --model {model} --method {method} -M {m} -K {k} --niters {niters}"
             print(cmd)
