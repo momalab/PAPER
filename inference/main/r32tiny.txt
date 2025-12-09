@@ -1,0 +1,174 @@
+fhe::Keys::Keys: Using custom parameters for n = 65536: logq = { +52 +52 +52 +52 +52 +52 +52 +52 +52 +52 +52 +52 +52 +52 +52 +52 +52 +52 +52 +52 +52 +52 +52 +52 +52 +52 +52 +52 +52 +52 +52 +52 +27 +54 }, scale = 6.71089e+07
+Loading input tiny.json ... ok
+Loading models { best_model_dataset_tiny_model_resnet32_seed_46493_degree_2_clip_2_penalty_0.001_sigma_0.0_pbit_10_slice_None_k_None_kf_1024_num_models_2.json best_model_dataset_tiny_model_resnet32_seed_50586_degree_2_clip_2_penalty_0.001_sigma_0.0_pbit_10_slice_None_k_None_kf_1024_num_models_2.json } ... ok
+Model:
+Node 1 Previous: { 0 } Next: { 2 } CONV2D kshape: { 64 3 3 3 } bshape: { 64 64 64 } padding: { 1 1 } stride: { 1 1 }
+Node 2 Previous: { 1 } Next: { 3 6 } POLY ksize: 2
+Node 3 Previous: { 2 } Next: { 4 } CONV2D kshape: { 64 64 3 3 } bshape: { 64 64 64 } padding: { 1 1 } stride: { 1 1 }
+Node 4 Previous: { 3 } Next: { 5 } POLY ksize: 2
+Node 5 Previous: { 4 } Next: { 6 } CONV2D kshape: { 64 64 3 3 } bshape: { 64 64 64 } padding: { 1 1 } stride: { 1 1 }
+Node 6 Previous: { 2 5 } Next: { 7 } ADD
+Node 7 Previous: { 6 } Next: { 8 11 } POLY ksize: 2
+Node 8 Previous: { 7 } Next: { 9 } CONV2D kshape: { 64 64 3 3 } bshape: { 64 64 64 } padding: { 1 1 } stride: { 1 1 }
+Node 9 Previous: { 8 } Next: { 10 } POLY ksize: 2
+Node 10 Previous: { 9 } Next: { 11 } CONV2D kshape: { 64 64 3 3 } bshape: { 64 64 64 } padding: { 1 1 } stride: { 1 1 }
+Node 11 Previous: { 7 10 } Next: { 12 } ADD
+Node 12 Previous: { 11 } Next: { 13 16 } POLY ksize: 2
+Node 13 Previous: { 12 } Next: { 14 } CONV2D kshape: { 64 64 3 3 } bshape: { 64 64 64 } padding: { 1 1 } stride: { 1 1 }
+Node 14 Previous: { 13 } Next: { 15 } POLY ksize: 2
+Node 15 Previous: { 14 } Next: { 16 } CONV2D kshape: { 64 64 3 3 } bshape: { 64 64 64 } padding: { 1 1 } stride: { 1 1 }
+Node 16 Previous: { 12 15 } Next: { 17 } ADD
+Node 17 Previous: { 16 } Next: { 18 21 } POLY ksize: 2
+Node 18 Previous: { 17 } Next: { 19 } CONV2D kshape: { 64 64 3 3 } bshape: { 64 64 64 } padding: { 1 1 } stride: { 1 1 }
+Node 19 Previous: { 18 } Next: { 20 } POLY ksize: 2
+Node 20 Previous: { 19 } Next: { 21 } CONV2D kshape: { 64 64 3 3 } bshape: { 64 64 64 } padding: { 1 1 } stride: { 1 1 }
+Node 21 Previous: { 17 20 } Next: { 22 } ADD
+Node 22 Previous: { 21 } Next: { 23 26 } POLY ksize: 2
+Node 23 Previous: { 22 } Next: { 24 } CONV2D kshape: { 64 64 3 3 } bshape: { 64 64 64 } padding: { 1 1 } stride: { 1 1 }
+Node 24 Previous: { 23 } Next: { 25 } POLY ksize: 2
+Node 25 Previous: { 24 } Next: { 26 } CONV2D kshape: { 64 64 3 3 } bshape: { 64 64 64 } padding: { 1 1 } stride: { 1 1 }
+Node 26 Previous: { 22 25 } Next: { 27 } ADD
+Node 27 Previous: { 26 } Next: { 28 31 } POLY ksize: 2
+Node 28 Previous: { 27 } Next: { 29 } CONV2D kshape: { 128 64 3 3 } bshape: { 128 32 32 } padding: { 1 1 } stride: { 2 2 }
+Node 29 Previous: { 28 } Next: { 30 } POLY ksize: 2
+Node 30 Previous: { 29 } Next: { 32 } CONV2D kshape: { 128 128 3 3 } bshape: { 128 32 32 } padding: { 1 1 } stride: { 1 1 }
+Node 31 Previous: { 27 } Next: { 32 } CONV2D kshape: { 128 64 1 1 } bshape: { 128 32 32 } padding: { 0 0 } stride: { 2 2 }
+Node 32 Previous: { 30 31 } Next: { 33 } ADD
+Node 33 Previous: { 32 } Next: { 34 37 } POLY ksize: 2
+Node 34 Previous: { 33 } Next: { 35 } CONV2D kshape: { 128 128 3 3 } bshape: { 128 32 32 } padding: { 1 1 } stride: { 1 1 }
+Node 35 Previous: { 34 } Next: { 36 } POLY ksize: 2
+Node 36 Previous: { 35 } Next: { 37 } CONV2D kshape: { 128 128 3 3 } bshape: { 128 32 32 } padding: { 1 1 } stride: { 1 1 }
+Node 37 Previous: { 33 36 } Next: { 38 } ADD
+Node 38 Previous: { 37 } Next: { 39 42 } POLY ksize: 2
+Node 39 Previous: { 38 } Next: { 40 } CONV2D kshape: { 128 128 3 3 } bshape: { 128 32 32 } padding: { 1 1 } stride: { 1 1 }
+Node 40 Previous: { 39 } Next: { 41 } POLY ksize: 2
+Node 41 Previous: { 40 } Next: { 42 } CONV2D kshape: { 128 128 3 3 } bshape: { 128 32 32 } padding: { 1 1 } stride: { 1 1 }
+Node 42 Previous: { 38 41 } Next: { 43 } ADD
+Node 43 Previous: { 42 } Next: { 44 47 } POLY ksize: 2
+Node 44 Previous: { 43 } Next: { 45 } CONV2D kshape: { 128 128 3 3 } bshape: { 128 32 32 } padding: { 1 1 } stride: { 1 1 }
+Node 45 Previous: { 44 } Next: { 46 } POLY ksize: 2
+Node 46 Previous: { 45 } Next: { 47 } CONV2D kshape: { 128 128 3 3 } bshape: { 128 32 32 } padding: { 1 1 } stride: { 1 1 }
+Node 47 Previous: { 43 46 } Next: { 48 } ADD
+Node 48 Previous: { 47 } Next: { 49 52 } POLY ksize: 2
+Node 49 Previous: { 48 } Next: { 50 } CONV2D kshape: { 128 128 3 3 } bshape: { 128 32 32 } padding: { 1 1 } stride: { 1 1 }
+Node 50 Previous: { 49 } Next: { 51 } POLY ksize: 2
+Node 51 Previous: { 50 } Next: { 52 } CONV2D kshape: { 128 128 3 3 } bshape: { 128 32 32 } padding: { 1 1 } stride: { 1 1 }
+Node 52 Previous: { 48 51 } Next: { 53 } ADD
+Node 53 Previous: { 52 } Next: { 54 57 } POLY ksize: 2
+Node 54 Previous: { 53 } Next: { 55 } CONV2D kshape: { 256 128 3 3 } bshape: { 256 16 16 } padding: { 1 1 } stride: { 2 2 }
+Node 55 Previous: { 54 } Next: { 56 } POLY ksize: 2
+Node 56 Previous: { 55 } Next: { 58 } CONV2D kshape: { 256 256 3 3 } bshape: { 256 16 16 } padding: { 1 1 } stride: { 1 1 }
+Node 57 Previous: { 53 } Next: { 58 } CONV2D kshape: { 256 128 1 1 } bshape: { 256 16 16 } padding: { 0 0 } stride: { 2 2 }
+Node 58 Previous: { 56 57 } Next: { 59 } ADD
+Node 59 Previous: { 58 } Next: { 60 63 } POLY ksize: 2
+Node 60 Previous: { 59 } Next: { 61 } CONV2D kshape: { 256 256 3 3 } bshape: { 256 16 16 } padding: { 1 1 } stride: { 1 1 }
+Node 61 Previous: { 60 } Next: { 62 } POLY ksize: 2
+Node 62 Previous: { 61 } Next: { 63 } CONV2D kshape: { 256 256 3 3 } bshape: { 256 16 16 } padding: { 1 1 } stride: { 1 1 }
+Node 63 Previous: { 59 62 } Next: { 64 } ADD
+Node 64 Previous: { 63 } Next: { 65 68 } POLY ksize: 2
+Node 65 Previous: { 64 } Next: { 66 } CONV2D kshape: { 256 256 3 3 } bshape: { 256 16 16 } padding: { 1 1 } stride: { 1 1 }
+Node 66 Previous: { 65 } Next: { 67 } POLY ksize: 2
+Node 67 Previous: { 66 } Next: { 68 } CONV2D kshape: { 256 256 3 3 } bshape: { 256 16 16 } padding: { 1 1 } stride: { 1 1 }
+Node 68 Previous: { 64 67 } Next: { 69 } ADD
+Node 69 Previous: { 68 } Next: { 70 73 } POLY ksize: 2
+Node 70 Previous: { 69 } Next: { 71 } CONV2D kshape: { 256 256 3 3 } bshape: { 256 16 16 } padding: { 1 1 } stride: { 1 1 }
+Node 71 Previous: { 70 } Next: { 72 } POLY ksize: 2
+Node 72 Previous: { 71 } Next: { 73 } CONV2D kshape: { 256 256 3 3 } bshape: { 256 16 16 } padding: { 1 1 } stride: { 1 1 }
+Node 73 Previous: { 69 72 } Next: { 74 } ADD
+Node 74 Previous: { 73 } Next: { 75 78 } POLY ksize: 2
+Node 75 Previous: { 74 } Next: { 76 } CONV2D kshape: { 256 256 3 3 } bshape: { 256 16 16 } padding: { 1 1 } stride: { 1 1 }
+Node 76 Previous: { 75 } Next: { 77 } POLY ksize: 2
+Node 77 Previous: { 76 } Next: { 78 } CONV2D kshape: { 256 256 3 3 } bshape: { 256 16 16 } padding: { 1 1 } stride: { 1 1 }
+Node 78 Previous: { 74 77 } Next: { 79 } ADD
+Node 79 Previous: { 78 } Next: { 80 } POLY ksize: 2
+Node 80 Previous: { 79 } Next: { 81 } AVGPOOL2D kshape: { 256 256 8 8 } padding: { 0 0 } stride: { 8 8 }
+Node 81 Previous: { 80 } Next: { } LINEAR kshape: { 200 256 2 2 } bshape: { 200 1 1 }
+Node 1 CONV2D     	Inplace: 0 { 0 }	(in 0.21s) level: 32 scale: 4.5036e+15
+Node 2 POLY       	Inplace: 1 { 1 }	(in 0.02s) level: 31 scale: 1.1259e+15
+Node 3 CONV2D     	Inplace: 0 { 2 }	(in 0.502s) level: 31 scale: 7.55579e+22
+Node 4 POLY       	Inplace: 1 { 3 }	(in 0.017s) level: 30 scale: 2.81475e+14
+Node 5 CONV2D     	Inplace: 0 { 4 }	(in 0.431s) level: 30 scale: 1.88895e+22
+Node 6 ADD        	Inplace: 1 { 2 5 }	(in 0.031s) level: 30 scale: 1.88895e+22
+Node 7 POLY       	Inplace: 1 { 6 }	(in 0.02s) level: 29 scale: 1.75922e+13
+Node 8 CONV2D     	Inplace: 0 { 7 }	(in 0.432s) level: 29 scale: 1.18059e+21
+Node 9 POLY       	Inplace: 1 { 8 }	(in 0.016s) level: 28 scale: 6.87195e+10
+Node 10 CONV2D     	Inplace: 0 { 9 }	(in 0.414s) level: 28 scale: 4.61169e+18
+Node 11 ADD        	Inplace: 1 { 7 10 }	(in 0.032s) level: 28 scale: 4.61169e+18
+Node 12 POLY       	Inplace: 1 { 11 }	(in 0.022s) level: 27 scale: 4.5036e+15
+Node 13 CONV2D     	Inplace: 0 { 12 }	(in 0.418s) level: 27 scale: 3.02231e+23
+Node 14 POLY       	Inplace: 1 { 13 }	(in 0.017s) level: 26 scale: 4.5036e+15
+Node 15 CONV2D     	Inplace: 0 { 14 }	(in 0.379s) level: 26 scale: 3.02231e+23
+Node 16 ADD        	Inplace: 1 { 12 15 }	(in 0.039s) level: 26 scale: 3.02231e+23
+Node 17 POLY       	Inplace: 1 { 16 }	(in 0.023s) level: 25 scale: 4.5036e+15
+Node 18 CONV2D     	Inplace: 0 { 17 }	(in 0.444s) level: 25 scale: 3.02231e+23
+Node 19 POLY       	Inplace: 1 { 18 }	(in 0.019s) level: 24 scale: 4.5036e+15
+Node 20 CONV2D     	Inplace: 0 { 19 }	(in 0.389s) level: 24 scale: 3.02231e+23
+Node 21 ADD        	Inplace: 1 { 17 20 }	(in 0.039s) level: 24 scale: 3.02231e+23
+Node 22 POLY       	Inplace: 1 { 21 }	(in 0.024s) level: 23 scale: 4.5036e+15
+Node 23 CONV2D     	Inplace: 0 { 22 }	(in 0.441s) level: 23 scale: 3.02231e+23
+Node 24 POLY       	Inplace: 1 { 23 }	(in 0.018s) level: 22 scale: 4.5036e+15
+Node 25 CONV2D     	Inplace: 0 { 24 }	(in 0.377s) level: 22 scale: 3.02231e+23
+Node 26 ADD        	Inplace: 1 { 22 25 }	(in 0.04s) level: 22 scale: 3.02231e+23
+Node 27 POLY       	Inplace: 1 { 26 }	(in 0.023s) level: 21 scale: 4.5036e+15
+Node 28 CONV2D     	Inplace: 0 { 27 }	(in 0.765s) level: 21 scale: 3.02231e+23
+Node 29 POLY       	Inplace: 1 { 28 }	(in 0.021s) level: 20 scale: 4.5036e+15
+Node 30 CONV2D     	Inplace: 0 { 29 }	(in 1.182s) level: 20 scale: 3.02231e+23
+Node 31 CONV2D     	Inplace: 0 { 27 }	(in 0.094s) level: 21 scale: 3.02231e+23
+Node 32 ADD        	Inplace: 1 { 30 31 }	(in 0.023s) level: 20 scale: 3.02231e+23
+Node 33 POLY       	Inplace: 1 { 32 }	(in 0.019s) level: 19 scale: 4.5036e+15
+Node 34 CONV2D     	Inplace: 0 { 33 }	(in 1.054s) level: 19 scale: 3.02231e+23
+Node 35 POLY       	Inplace: 1 { 34 }	(in 0.018s) level: 18 scale: 4.5036e+15
+Node 36 CONV2D     	Inplace: 0 { 35 }	(in 1.176s) level: 18 scale: 3.02231e+23
+Node 37 ADD        	Inplace: 1 { 33 36 }	(in 0.046s) level: 18 scale: 3.02231e+23
+Node 38 POLY       	Inplace: 1 { 37 }	(in 0.019s) level: 17 scale: 4.5036e+15
+Node 39 CONV2D     	Inplace: 0 { 38 }	(in 1.012s) level: 17 scale: 3.02231e+23
+Node 40 POLY       	Inplace: 1 { 39 }	(in 0.017s) level: 16 scale: 4.5036e+15
+Node 41 CONV2D     	Inplace: 0 { 40 }	(in 1.157s) level: 16 scale: 3.02231e+23
+Node 42 ADD        	Inplace: 1 { 38 41 }	(in 0.045s) level: 16 scale: 3.02231e+23
+Node 43 POLY       	Inplace: 1 { 42 }	(in 0.021s) level: 15 scale: 4.5036e+15
+Node 44 CONV2D     	Inplace: 0 { 43 }	(in 1.151s) level: 15 scale: 3.02231e+23
+Node 45 POLY       	Inplace: 1 { 44 }	(in 0.018s) level: 14 scale: 4.5036e+15
+Node 46 CONV2D     	Inplace: 0 { 45 }	(in 1.033s) level: 14 scale: 3.02231e+23
+Node 47 ADD        	Inplace: 1 { 43 46 }	(in 0.045s) level: 14 scale: 3.02231e+23
+Node 48 POLY       	Inplace: 1 { 47 }	(in 0.018s) level: 13 scale: 4.5036e+15
+Node 49 CONV2D     	Inplace: 0 { 48 }	(in 1.178s) level: 13 scale: 3.02231e+23
+Node 50 POLY       	Inplace: 1 { 49 }	(in 0.018s) level: 12 scale: 4.5036e+15
+Node 51 CONV2D     	Inplace: 0 { 50 }	(in 1.028s) level: 12 scale: 3.02231e+23
+Node 52 ADD        	Inplace: 1 { 48 51 }	(in 0.046s) level: 12 scale: 3.02231e+23
+Node 53 POLY       	Inplace: 1 { 52 }	(in 0.021s) level: 11 scale: 4.5036e+15
+Node 54 CONV2D     	Inplace: 0 { 53 }	(in 3.222s) level: 11 scale: 3.02231e+23
+Node 55 POLY       	Inplace: 1 { 54 }	(in 0.029s) level: 10 scale: 4.5036e+15
+Node 56 CONV2D     	Inplace: 0 { 55 }	(in 6.488s) level: 10 scale: 3.02231e+23
+Node 57 CONV2D     	Inplace: 0 { 53 }	(in 0.263s) level: 11 scale: 3.02231e+23
+Node 58 ADD        	Inplace: 1 { 56 57 }	(in 0.033s) level: 10 scale: 3.02231e+23
+Node 59 POLY       	Inplace: 1 { 58 }	(in 0.023s) level: 9 scale: 4.5036e+15
+Node 60 CONV2D     	Inplace: 0 { 59 }	(in 4.769s) level: 9 scale: 3.02231e+23
+Node 61 POLY       	Inplace: 1 { 60 }	(in 0.023s) level: 8 scale: 4.5036e+15
+Node 62 CONV2D     	Inplace: 0 { 61 }	(in 5.98s) level: 8 scale: 3.02231e+23
+Node 63 ADD        	Inplace: 1 { 59 62 }	(in 0.07s) level: 8 scale: 3.02231e+23
+Node 64 POLY       	Inplace: 1 { 63 }	(in 0.042s) level: 7 scale: 4.5036e+15
+Node 65 CONV2D     	Inplace: 0 { 64 }	(in 5.639s) level: 7 scale: 3.02231e+23
+Node 66 POLY       	Inplace: 1 { 65 }	(in 0.023s) level: 6 scale: 4.5036e+15
+Node 67 CONV2D     	Inplace: 0 { 66 }	(in 5.522s) level: 6 scale: 3.02231e+23
+Node 68 ADD        	Inplace: 1 { 64 67 }	(in 0.085s) level: 6 scale: 3.02231e+23
+Node 69 POLY       	Inplace: 1 { 68 }	(in 0.029s) level: 5 scale: 4.5036e+15
+Node 70 CONV2D     	Inplace: 0 { 69 }	(in 5.985s) level: 5 scale: 3.02231e+23
+Node 71 POLY       	Inplace: 1 { 70 }	(in 0.023s) level: 4 scale: 4.5036e+15
+Node 72 CONV2D     	Inplace: 0 { 71 }	(in 5.711s) level: 4 scale: 3.02231e+23
+Node 73 ADD        	Inplace: 1 { 69 72 }	(in 0.106s) level: 4 scale: 3.02231e+23
+Node 74 POLY       	Inplace: 1 { 73 }	(in 0.031s) level: 3 scale: 4.5036e+15
+Node 75 CONV2D     	Inplace: 0 { 74 }	(in 6.04s) level: 3 scale: 3.02231e+23
+Node 76 POLY       	Inplace: 1 { 75 }	(in 0.032s) level: 2 scale: 4.5036e+15
+Node 77 CONV2D     	Inplace: 0 { 76 }	(in 6.015s) level: 2 scale: 3.02231e+23
+Node 78 ADD        	Inplace: 1 { 74 77 }	(in 0.119s) level: 2 scale: 3.02231e+23
+Node 79 POLY       	Inplace: 1 { 78 }	(in 0.03s) level: 1 scale: 4.5036e+15
+Node 80 AVGPOOL2D  	Inplace: 0 { 79 }	(in 2.318s) level: 1 scale: 4.5036e+15
+Node 81 LINEAR     	Inplace: 0 { 80 }	(in 7.174s) level: 1 scale: 3.02231e+23
+Sample 0, Predicted: 36, Expected: 36, Correct: 1
+Output:
+{ +7.576093e-01 +5.791802e+00 +8.310217e-01 +4.252595e+00 -1.891712e+00 -4.834532e-01 -1.658612e+00 -4.851761e-01 +3.306036e+00 -2.769756e+00 -8.009256e-01 +2.131629e+00 -2.196156e+00 +7.065814e-01 -1.112610e+00 +4.965431e+00 +7.648215e-01 +9.381202e-03 -3.262004e+00 -2.394714e+00 +2.161324e-01 +3.039985e+00 -1.311993e+00 -3.366362e+00 +1.257334e+00 -1.526687e+00 -8.831438e-01 +2.212976e+00 -3.543268e+00 -2.652338e+00 +1.070857e-01 -1.213021e+00 -2.320845e+00 -2.746566e+00 -2.234959e+00 -1.428418e+00 +1.031579e+01 +4.178475e+00 +4.603685e+00 -6.402423e-01 -3.898606e+00 +2.190728e+00 -6.643619e-01 +5.031891e+00 +4.213928e+00 +2.026270e+00 -4.262221e+00 +1.490337e+00 -2.189519e+00 +3.707043e+00 -3.995808e+00 -4.870809e-01 -1.445274e+00 -2.623947e+00 -3.579985e+00 +2.678953e+00 +6.813274e-01 -4.421825e+00 -1.181570e-01 -1.278614e+00 +1.114669e+00 -1.137549e+00 -8.334070e-01 -5.677763e-01 -3.642394e+00 -1.448804e+00 +4.680050e-02 +5.989588e-01 -9.517008e-01 -4.068683e-01 -9.799521e-01 +2.027082e+00 -1.574327e-01 +3.388241e+00 -2.320994e+00 +5.789136e+00 +2.490844e+00 +4.668298e+00 -1.634243e+00 -3.834815e+00 +1.171789e+00 -9.925850e-01 -3.308684e+00 +2.461289e-01 -2.104492e+00 +1.506729e+00 -2.410687e+00 -2.046954e+00 -5.742608e-01 +8.747945e-01 -1.960754e+00 -1.541538e+00 -6.230644e-01 +1.884304e+00 -2.816642e+00 -9.070792e-01 -3.357924e+00 -2.098573e+00 -1.897398e+00 -1.093225e+00 -1.215783e+00 +2.624542e-01 +1.619825e+00 -4.372151e+00 +1.388007e-01 -3.942895e-01 +5.133410e+00 -8.698442e-01 -8.931262e-02 +4.393597e+00 +2.880340e+00 -6.817537e-01 +2.021798e+00 +3.405004e+00 +1.518233e+00 -1.336510e+00 -8.420904e-01 +6.953755e-01 +1.044376e+00 +3.703510e+00 -1.727279e+00 -3.201289e+00 +1.141017e+00 +1.784221e-01 -2.355105e+00 -1.760240e+00 -2.584433e+00 +8.809254e-02 -9.328546e-01 -1.825763e+00 +4.633485e-02 +1.711817e+00 -2.930510e+00 -2.054826e+00 -4.887180e-01 +1.082664e+00 -1.971731e+00 -3.563394e+00 +4.184785e-01 +4.827563e+00 -2.083207e+00 -1.699167e+00 -3.017969e+00 -4.020832e-01 -1.832416e+00 +3.050024e+00 +3.982039e-02 +2.968588e-01 +8.032665e-01 -1.138589e+00 +3.133555e+00 -2.156733e+00 +2.499861e-01 +2.403023e+00 -3.511044e+00 +8.391503e-01 +7.535201e+00 +1.771968e+00 -3.104541e+00 -1.185352e+00 +3.052732e+00 +1.753914e+00 -1.332808e+00 +1.697953e+00 +2.567525e-01 -2.287985e+00 -1.567535e+00 -2.466489e+00 +3.776855e-01 -1.125950e-01 -1.241838e+00 -2.827228e+00 +2.055887e+00 -1.949927e-01 +1.918078e+00 -5.730645e-01 -2.731257e+00 +1.715788e+00 +2.685411e+00 +1.760811e+00 -3.692539e+00 +2.948643e-01 +1.236272e+00 -1.184251e+00 +1.135066e+00 +5.127410e+00 +1.319233e+00 +2.886181e+00 +3.599525e+00 +4.817668e+00 -4.247181e-01 -4.338061e-01 +3.222855e-01 +3.796538e+00 -7.954977e-01 -2.517989e+00 -1.198538e-01 -1.252609e+00 -2.923659e+00 +4.027107e+00 }
+{ -2.537966e+00 +4.734049e+00 +9.742083e-01 +1.885477e+00 -1.999435e+00 +9.880759e-01 -8.134455e-01 -1.178724e+00 +2.116058e+00 +2.503963e-01 +5.824092e-01 -3.589103e-01 -2.112596e+00 -1.582141e+00 -1.769321e+00 +4.044741e+00 +3.471803e-01 -2.856800e+00 -4.823854e+00 -3.136630e+00 -2.363809e+00 +4.615406e-01 -3.385767e+00 -3.069258e+00 -5.512245e-02 -2.725336e+00 +7.896685e-01 -2.645752e+00 -4.141418e+00 -2.326723e+00 -1.858581e+00 +8.760074e-01 -6.054370e-01 -4.473502e+00 -1.339395e+00 +5.938619e-01 +7.677435e+00 +3.890781e+00 +2.954439e+00 +9.294724e-01 +1.571370e+00 +4.535190e-01 -1.500634e-01 +9.664732e+00 +1.352763e+00 +6.511617e-01 -2.936670e+00 +3.176719e+00 -4.586990e+00 +1.201702e+00 -3.709160e+00 -9.671126e-01 -1.549602e+00 -7.522577e-01 -1.745390e-01 +2.495411e-01 +2.225612e-01 -2.174307e+00 +1.301243e+00 +5.483258e+00 -7.967818e-01 -2.571198e+00 -2.367579e+00 -2.795927e+00 -6.318445e-01 +2.804440e-01 -2.858749e+00 +1.463014e+00 -7.495642e-01 -1.457892e+00 -5.016089e-01 -2.587346e-01 +1.917314e+00 +4.794974e+00 -1.369645e+00 +9.777449e+00 -1.471472e+00 +1.090522e+00 -1.224659e+00 +4.581903e-01 -1.155609e+00 -5.441052e-01 -3.776124e+00 -2.390603e-02 -1.591309e+00 +1.785430e+00 -1.047088e+00 +2.734333e-02 +5.229587e+00 -2.634499e-02 -2.042877e+00 -3.564094e+00 +1.497547e+00 +6.855999e-02 -5.400813e+00 +2.334222e+00 -2.812016e+00 +2.240818e+00 -1.864479e+00 +3.044898e+00 +4.483019e+00 -1.542871e+00 +1.846239e+00 -3.179910e+00 -2.324257e+00 -7.909516e-01 -6.131688e-01 +4.284369e-01 -2.449323e+00 +2.091776e+00 +1.582347e+00 -2.492208e+00 -7.525085e-01 +2.654398e+00 -2.773429e+00 -1.882826e+00 -9.068547e-01 +1.568149e+00 +2.228860e+00 -1.476483e+00 -1.934462e+00 -2.867284e+00 +2.924594e+00 -3.360820e+00 +2.430767e-01 +4.162987e+00 -1.902416e+00 -2.593689e+00 -2.638574e-01 -3.227730e+00 +1.735911e+00 -1.902505e+00 +2.333552e+00 -7.818267e-01 -1.390375e+00 +2.956747e+00 -3.161322e+00 +7.703460e-01 +5.107669e+00 +3.926918e+00 -2.334811e-01 +3.150317e+00 -4.368914e+00 +1.257437e+00 -1.466132e+00 +3.204291e+00 +3.846302e+00 +3.627396e+00 -7.118214e-01 +2.511495e+00 +3.164966e+00 -1.775186e+00 +5.310442e+00 +3.028084e+00 -1.555452e+00 +2.973519e+00 +1.312500e+00 -4.278060e-01 -3.023030e+00 +5.124207e+00 +2.508632e+00 +2.274660e+00 +1.206857e+00 +1.312619e+00 -1.192990e+00 -3.320066e+00 +2.459660e+00 +1.398186e+00 -1.082665e+00 -2.568188e-01 -2.817985e-01 +2.215256e+00 -2.255619e+00 -2.439264e+00 -7.619040e-01 -2.466856e+00 -1.610705e+00 -2.986579e-01 -7.550535e-01 -1.437753e+00 -7.923627e-01 +1.894364e+00 -3.681825e+00 -1.687129e+00 +7.064164e-01 +1.380779e+00 +1.385153e+00 +1.952053e+00 +2.856448e+00 +3.298764e+00 -1.350474e+00 -1.191129e-01 -3.166473e+00 +2.561905e+00 -9.568877e-01 -2.975602e+00 -3.945947e+00 -7.845529e-01 -1.756909e+00 +5.171417e+00 }
+Probabilities: { +3.168158e-05 +6.206668e-03 +6.793463e-05 +1.096504e-03 +3.953274e-06 +4.430730e-05 +8.585748e-06 +1.290228e-05 +5.012956e-04 +1.785340e-05 +3.007654e-05 +1.302772e-04 +3.193527e-06 +3.182701e-05 +6.970661e-06 +2.812772e-03 +4.953634e-05 +1.525656e-05 +6.563213e-07 +1.883052e-06 +1.906964e-05 +3.211948e-04 +4.314461e-06 +1.108853e-06 +6.299068e-05 +3.985189e-06 +3.500938e-05 +1.322550e-04 +6.252077e-07 +2.300704e-06 +1.804384e-05 +3.596212e-05 +8.614196e-06 +1.071903e-06 +4.994690e-06 +2.734362e-05 +4.623396e-01 +1.583441e-03 +1.687442e-03 +4.100421e-05 +6.381583e-05 +1.492007e-04 +1.875002e-05 +2.100962e-01 +1.022296e-03 +1.342640e-04 +9.024316e-07 +3.800786e-04 +1.742627e-06 +6.289411e-04 +5.874948e-07 +1.384241e-05 +6.187420e-06 +7.261735e-06 +1.148457e-05 +2.262043e-04 +4.487611e-05 +1.672961e-06 +6.124956e-05 +3.179803e-03 +4.973558e-05 +5.613711e-06 +7.478386e-06 +8.946528e-06 +7.392303e-06 +2.084345e-05 +1.580788e-05 +8.314493e-05 +1.178226e-05 +1.263336e-05 +1.338289e-05 +1.192311e-04 +1.020517e-04 +2.020985e-03 +4.764967e-06 +2.373933e-01 +1.764117e-04 +1.569161e-03 +6.680517e-06 +2.117898e-05 +5.051569e-05 +1.298270e-05 +8.275518e-07 +3.125726e-05 +4.438820e-06 +1.434926e-04 +5.921041e-06 +1.541841e-05 +2.472345e-03 +4.730256e-05 +3.732792e-06 +3.448210e-06 +6.670683e-05 +1.086680e-04 +9.185566e-07 +1.420196e-04 +1.292917e-06 +1.258352e-04 +4.199212e-06 +2.820737e-04 +1.172292e-03 +2.149476e-05 +1.561857e-04 +7.302113e-07 +1.779300e-05 +1.566700e-05 +2.443022e-03 +2.627521e-05 +1.427543e-05 +1.269301e-03 +3.201781e-04 +8.355581e-06 +1.146860e-04 +6.201583e-04 +6.637879e-05 +5.782210e-06 +1.151689e-05 +9.211033e-05 +1.634130e-04 +5.859997e-04 +4.460387e-06 +1.335053e-06 +2.907881e-04 +1.762650e-05 +1.819233e-05 +8.506103e-04 +3.052751e-06 +1.667207e-05 +1.578788e-05 +2.837055e-06 +8.993028e-05 +8.152559e-05 +1.368965e-04 +7.879067e-06 +1.209644e-05 +2.962728e-04 +2.558737e-06 +2.892134e-05 +2.203238e-03 +2.463817e-03 +1.223836e-05 +3.107111e-04 +8.695052e-07 +5.601680e-05 +5.344746e-06 +6.284559e-04 +6.328672e-04 +5.157632e-04 +3.854675e-05 +1.672423e-04 +6.423387e-04 +3.898238e-06 +2.690224e-03 +4.314419e-04 +3.214958e-06 +2.914010e-04 +2.694825e-02 +9.309302e-05 +1.286233e-06 +2.222177e-03 +4.662852e-04 +2.113217e-04 +4.790811e-05 +1.275032e-04 +2.257042e-05 +1.934527e-06 +1.574221e-04 +5.464231e-05 +2.542417e-05 +2.304215e-05 +1.410561e-05 +1.217923e-04 +1.136119e-04 +1.296959e-05 +1.039413e-04 +9.217609e-06 +3.571802e-06 +8.966342e-05 +2.168242e-04 +8.668538e-05 +6.333428e-06 +1.070325e-04 +4.978035e-05 +6.836974e-06 +7.143691e-05 +2.473802e-03 +1.064567e-04 +3.504061e-04 +7.550465e-04 +2.133743e-03 +1.281251e-05 +2.102361e-05 +2.038117e-05 +8.108725e-04 +1.155194e-05 +1.831276e-06 +1.299580e-05 +1.012684e-05 +3.049479e-06 +3.130737e-03 }
+Accuracy: 1 Inference time: 82.280s
+Rotation counter: 1,2,4,8,12,16,20,24,28,32,63,64,65,126,128,130,252,256,260,264,268,272,276,280,284,512,516,520,524,528,532,536,540,768,772,776,780,784,788,792,796,1024,1028,1032,1036,1040,1044,1048,1052,1280,1284,1288,1292,1296,1300,1304,1308,1536,1540,1544,1548,1552,1556,1560,1564,1792,1796,1800,1804,1808,1812,1816,1820,2048,2080,32508,32512,32516,32638,32640,32642,32703,32704,32705,32764,32766,32767,
+Accuracy: 1

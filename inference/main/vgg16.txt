@@ -1,0 +1,84 @@
+fhe::Keys::Keys: Using custom parameters for n = 32768: logq = { +48 +48 +48 +48 +48 +48 +48 +48 +48 +48 +48 +48 +48 +48 +48 +48 +48 +54 }, scale = 1.67772e+07
+Loading input cifar10.json ... ok
+Loading models { best_model_dataset_cifar10_model_vgg16_seed_28083_degree_2_clip_2_penalty_0.001_sigma_0.0_pbit_10_slice_None_k_None_kf_1024_num_models_2.json best_model_dataset_cifar10_model_vgg16_seed_3568_degree_2_clip_2_penalty_0.001_sigma_0.0_pbit_10_slice_None_k_None_kf_1024_num_models_2.json } ... ok
+Model:
+Node 1 Previous: { 0 } Next: { 2 } CONV2D kshape: { 64 3 3 3 } bshape: { 64 32 32 } padding: { 1 1 } stride: { 1 1 }
+Node 2 Previous: { 1 } Next: { 3 } POLY ksize: 2
+Node 3 Previous: { 2 } Next: { 4 } CONV2D kshape: { 64 64 3 3 } bshape: { 64 32 32 } padding: { 1 1 } stride: { 1 1 }
+Node 4 Previous: { 3 } Next: { 5 } AVGPOOL2D kshape: { 64 64 2 2 } padding: { 0 0 } stride: { 2 2 }
+Node 5 Previous: { 4 } Next: { 6 } POLY ksize: 2
+Node 6 Previous: { 5 } Next: { 7 } CONV2D kshape: { 128 64 3 3 } bshape: { 128 16 16 } padding: { 1 1 } stride: { 1 1 }
+Node 7 Previous: { 6 } Next: { 8 } POLY ksize: 2
+Node 8 Previous: { 7 } Next: { 9 } CONV2D kshape: { 128 128 3 3 } bshape: { 128 16 16 } padding: { 1 1 } stride: { 1 1 }
+Node 9 Previous: { 8 } Next: { 10 } AVGPOOL2D kshape: { 128 128 2 2 } padding: { 0 0 } stride: { 2 2 }
+Node 10 Previous: { 9 } Next: { 11 } POLY ksize: 2
+Node 11 Previous: { 10 } Next: { 12 } CONV2D kshape: { 256 128 3 3 } bshape: { 256 8 8 } padding: { 1 1 } stride: { 1 1 }
+Node 12 Previous: { 11 } Next: { 13 } POLY ksize: 2
+Node 13 Previous: { 12 } Next: { 14 } CONV2D kshape: { 256 256 3 3 } bshape: { 256 8 8 } padding: { 1 1 } stride: { 1 1 }
+Node 14 Previous: { 13 } Next: { 15 } POLY ksize: 2
+Node 15 Previous: { 14 } Next: { 16 } CONV2D kshape: { 256 256 3 3 } bshape: { 256 8 8 } padding: { 1 1 } stride: { 1 1 }
+Node 16 Previous: { 15 } Next: { 17 } AVGPOOL2D kshape: { 256 256 2 2 } padding: { 0 0 } stride: { 2 2 }
+Node 17 Previous: { 16 } Next: { 18 } POLY ksize: 2
+Node 18 Previous: { 17 } Next: { 19 } CONV2D kshape: { 512 256 3 3 } bshape: { 512 4 4 } padding: { 1 1 } stride: { 1 1 }
+Node 19 Previous: { 18 } Next: { 20 } POLY ksize: 2
+Node 20 Previous: { 19 } Next: { 21 } CONV2D kshape: { 512 512 3 3 } bshape: { 512 4 4 } padding: { 1 1 } stride: { 1 1 }
+Node 21 Previous: { 20 } Next: { 22 } POLY ksize: 2
+Node 22 Previous: { 21 } Next: { 23 } CONV2D kshape: { 512 512 3 3 } bshape: { 512 4 4 } padding: { 1 1 } stride: { 1 1 }
+Node 23 Previous: { 22 } Next: { 24 } AVGPOOL2D kshape: { 512 512 2 2 } padding: { 0 0 } stride: { 2 2 }
+Node 24 Previous: { 23 } Next: { 25 } POLY ksize: 2
+Node 25 Previous: { 24 } Next: { 26 } CONV2D kshape: { 512 512 3 3 } bshape: { 512 2 2 } padding: { 1 1 } stride: { 1 1 }
+Node 26 Previous: { 25 } Next: { 27 } POLY ksize: 2
+Node 27 Previous: { 26 } Next: { 28 } CONV2D kshape: { 512 512 3 3 } bshape: { 512 2 2 } padding: { 1 1 } stride: { 1 1 }
+Node 28 Previous: { 27 } Next: { 29 } POLY ksize: 2
+Node 29 Previous: { 28 } Next: { 30 } CONV2D kshape: { 512 512 3 3 } bshape: { 512 2 2 } padding: { 1 1 } stride: { 1 1 }
+Node 30 Previous: { 29 } Next: { 31 } AVGPOOL2D kshape: { 512 512 2 2 } padding: { 0 0 } stride: { 2 2 }
+Node 31 Previous: { 30 } Next: { 32 } POLY ksize: 2
+Node 32 Previous: { 31 } Next: { 33 } LINEAR kshape: { 512 512 1 1 } bshape: { 512 1 1 }
+Node 33 Previous: { 32 } Next: { 34 } POLY ksize: 2
+Node 34 Previous: { 33 } Next: { 35 } LINEAR kshape: { 512 512 1 1 } bshape: { 512 1 1 }
+Node 35 Previous: { 34 } Next: { 36 } POLY ksize: 2
+Node 36 Previous: { 35 } Next: { } LINEAR kshape: { 10 512 1 1 } bshape: { 10 1 1 }
+Node 1 CONV2D     	Inplace: 0 { 0 }	(in 0.296s) level: 16 scale: 2.81475e+14
+Node 2 POLY       	Inplace: 1 { 1 }	(in 0.035s) level: 15 scale: 2.81475e+14
+Node 3 CONV2D     	Inplace: 0 { 2 }	(in 1.149s) level: 15 scale: 4.72237e+21
+Node 4 AVGPOOL2D  	Inplace: 0 { 3 }	(in 0.056s) level: 14 scale: 1.67772e+07
+Node 5 POLY       	Inplace: 1 { 4 }	(in 0.035s) level: 14 scale: 2.81475e+14
+Node 6 CONV2D     	Inplace: 0 { 5 }	(in 1.511s) level: 14 scale: 4.72237e+21
+Node 7 POLY       	Inplace: 1 { 6 }	(in 0.045s) level: 13 scale: 2.81475e+14
+Node 8 CONV2D     	Inplace: 0 { 7 }	(in 2.215s) level: 13 scale: 4.72237e+21
+Node 9 AVGPOOL2D  	Inplace: 0 { 8 }	(in 0.085s) level: 12 scale: 1.67772e+07
+Node 10 POLY       	Inplace: 1 { 9 }	(in 0.038s) level: 12 scale: 2.81475e+14
+Node 11 CONV2D     	Inplace: 0 { 10 }	(in 3.243s) level: 12 scale: 4.72237e+21
+Node 12 POLY       	Inplace: 1 { 11 }	(in 0.024s) level: 11 scale: 2.81475e+14
+Node 13 CONV2D     	Inplace: 0 { 12 }	(in 5.467s) level: 11 scale: 4.72237e+21
+Node 14 POLY       	Inplace: 1 { 13 }	(in 0.025s) level: 10 scale: 2.81475e+14
+Node 15 CONV2D     	Inplace: 0 { 14 }	(in 4.761s) level: 10 scale: 4.72237e+21
+Node 16 AVGPOOL2D  	Inplace: 0 { 15 }	(in 0.063s) level: 9 scale: 1.67772e+07
+Node 17 POLY       	Inplace: 1 { 16 }	(in 0.028s) level: 9 scale: 2.81475e+14
+Node 18 CONV2D     	Inplace: 0 { 17 }	(in 8.064s) level: 9 scale: 4.72237e+21
+Node 19 POLY       	Inplace: 1 { 18 }	(in 0.035s) level: 8 scale: 2.81475e+14
+Node 20 CONV2D     	Inplace: 0 { 19 }	(in 13.839s) level: 8 scale: 4.72237e+21
+Node 21 POLY       	Inplace: 1 { 20 }	(in 0.031s) level: 7 scale: 2.81475e+14
+Node 22 CONV2D     	Inplace: 0 { 21 }	(in 24.122s) level: 7 scale: 4.72237e+21
+Node 23 AVGPOOL2D  	Inplace: 0 { 22 }	(in 0.336s) level: 6 scale: 1.67772e+07
+Node 24 POLY       	Inplace: 1 { 23 }	(in 0.201s) level: 6 scale: 2.81475e+14
+Node 25 CONV2D     	Inplace: 0 { 24 }	(in 26.972s) level: 6 scale: 4.72237e+21
+Node 26 POLY       	Inplace: 1 { 25 }	(in 0.068s) level: 5 scale: 2.81475e+14
+Node 27 CONV2D     	Inplace: 0 { 26 }	(in 10.947s) level: 5 scale: 4.72237e+21
+Node 28 POLY       	Inplace: 1 { 27 }	(in 0.036s) level: 4 scale: 2.81475e+14
+Node 29 CONV2D     	Inplace: 0 { 28 }	(in 8.472s) level: 4 scale: 4.72237e+21
+Node 30 AVGPOOL2D  	Inplace: 0 { 29 }	(in 0.079s) level: 3 scale: 1.67772e+07
+Node 31 POLY       	Inplace: 1 { 30 }	(in 0.055s) level: 3 scale: 2.81475e+14
+Node 32 LINEAR     	Inplace: 0 { 31 }	(in 31.24s) level: 3 scale: 4.72237e+21
+Node 33 POLY       	Inplace: 1 { 32 }	(in 0.222s) level: 2 scale: 2.81475e+14
+Node 34 LINEAR     	Inplace: 0 { 33 }	(in 25.738s) level: 2 scale: 4.72237e+21
+Node 35 POLY       	Inplace: 1 { 34 }	(in 0.066s) level: 1 scale: 2.81475e+14
+Node 36 LINEAR     	Inplace: 0 { 35 }	(in 0.585s) level: 1 scale: 4.72237e+21
+Sample 0, Predicted: 9, Expected: 9, Correct: 1
+Output:
+{ -1.253020e+00 -3.047566e+00 -3.699110e-01 +5.947937e-01 -6.924206e-01 -1.508102e+00 -7.006093e-01 -6.505063e-01 -5.669332e-01 +8.247154e+00 }
+{ -1.316379e+00 -2.985454e+00 -1.224681e+00 -4.468774e-02 -5.421596e-01 -9.078509e-01 -2.946486e-02 -2.322687e-01 -5.527933e-01 +7.998398e+00 }
+Probabilities: { +8.233670e-05 +1.468371e-05 +1.396596e-04 +3.975355e-04 +1.629905e-04 +9.661393e-05 +2.277809e-04 +2.012229e-04 +1.707109e-04 +9.985065e-01 }
+Accuracy: 1 Inference time: 171.202s
+Rotation counter: 1,2,4,8,16,31,32,33,62,64,66,124,128,132,248,256,264,496,512,528,15856,15872,15888,16120,16128,16136,16252,16256,16260,16318,16320,16322,16351,16352,16353,16368,16376,16380,16382,16383,
+Accuracy: 1
