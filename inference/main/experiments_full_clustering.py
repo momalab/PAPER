@@ -9,7 +9,8 @@ root_models = f"{root}/model_jsons"
 root_datasets = f"{root}/dataset_jsons"
 experiment = "full_clustering_after_polynomial_training"
 program = "ensemble_adapt"
-compilation_parameters = "LIBRARY=seal"
+# compilation_parameters = "LIBRARY=seal"
+compilation_parameters = ""
 sigmas = ["0.0"] # ["0.01", "0.05"]
 ks = [2, 4, 8, 16, 32, 64, 128, 256, 512, 1024]
 

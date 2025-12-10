@@ -9,7 +9,8 @@ root_models = f"{root}/model_jsons"
 root_datasets = f"{root}/dataset_jsons"
 experiment = "standard_accuracy"
 program = "ensemble_adapt"
-compilation_parameters = "LIBRARY=seal CONVOLUTION=classical"
+# compilation_parameters = "LIBRARY=seal CONVOLUTION=classical"
+compilation_parameters = "CONVOLUTION=classical"
 sigmas = ["0.0"] # ["0.0", "0.001", "0.005", "0.01", "0.05", "0.1", "0.5"]
 
 
