@@ -39,26 +39,26 @@ def parse_args():
         "--mode", "-e",
         type=str,
         choices=["accuracy", "time", "both"],
-        default="both",
+        default="time",
         help="Tells which data to collect: {accuracy, time, both}."
     )
 
-    # Dataset: cifar10 / cifar100
+    # Dataset: cifar10 / cifar100 / tiny
     parser.add_argument(
         "--dataset", "-d",
         type=str,
-        choices=["all", "cifar10", "cifar100"],
+        choices=["all", "cifar10", "cifar100", "tiny"],
         default="all",
-        help="Dataset to use: {all, cifar10, cifar100}."
+        help="Dataset to use: {all, cifar10, cifar100, tiny}."
     )
 
-    # Model: resnet18 / resnet20 / resnet32
+    # Model: vgg16 / resnet18 / resnet20 / resnet32
     parser.add_argument(
         "--model", "-m",
         type=str,
-        choices=["all", "resnet18", "resnet20", "resnet32"],
+        choices=["all", "vgg16", "resnet18", "resnet20", "resnet32"],
         default="all",
-        help="Model architecture: {all, resnet18, resnet20, resnet32}."
+        help="Model architecture: {all, vgg16, resnet18, resnet20, resnet32}."
     )
 
     # Method: standard / full_clustering / slice_clustering
@@ -119,8 +119,8 @@ def run(dataset, model, method, mode, args):
             skip_compilation = True
 
 def reproduce(args):
-    datasets = ["cifar10", "cifar100"] if args.dataset == "all" else [args.dataset]
-    models = ["resnet18", "resnet20", "resnet32"] if args.model == "all" else [args.model]
+    datasets = ["cifar10", "cifar100", "tiny"] if args.dataset == "all" else [args.dataset]
+    models = ["vgg16", "resnet18", "resnet20", "resnet32"] if args.model == "all" else [args.model]
     methods = ["standard", "full_clustering", "slice_clustering"] if args.method == "all" else [args.method]
     modes = ["accuracy", "time"] if args.mode == "both" else [args.mode]
     for dataset in datasets:
