@@ -4,7 +4,7 @@ import sys
 import subprocess
 
 #
-root = "/data/papermem"
+root = "/data/paperview"
 root_models = f"{root}/model_jsons"
 root_datasets = f"{root}/dataset_jsons"
 experiment = "full_clustering_after_polynomial_training"
