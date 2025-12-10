@@ -9,10 +9,9 @@ root_models = f"{root}/model_jsons"
 root_datasets = f"{root}/dataset_jsons"
 experiment = "ensemble_ed_clustering"
 program = "ensemble_adapt"
-# compilation_parameters = "LIBRARY=seal"
-compilation_parameters = ""
+compilation_parameters = "LIBRARY=seal"
 sigmas = ["0.0"] # ["0.01", "0.05"]
-ensembles = [2] #, [2, 4, 8]
+ensembles = [2, 4]
 cluster_sizes = [2048, 4096] # [64, 128, 256, 512, 1024, 2048, 4096, 8192]
 
 dlogN = {
