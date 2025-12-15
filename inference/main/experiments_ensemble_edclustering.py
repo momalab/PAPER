@@ -11,8 +11,8 @@ experiment = "ensemble_ed_clustering"
 program = "ensemble_adapt"
 compilation_parameters = "LIBRARY=seal"
 sigmas = ["0.0"] # ["0.01", "0.05"]
-ensembles = [2] # [2, 4]
-cluster_sizes = [1024, 2048, 4096] # [64, 128, 256, 512, 1024, 2048, 4096, 8192]
+ensembles = [2, 4]
+cluster_sizes = [2048, 4096] # [64, 128, 256, 512, 1024, 2048, 4096, 8192]
 
 dlogN = {
     "vgg16"   : "15",
