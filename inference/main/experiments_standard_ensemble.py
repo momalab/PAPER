@@ -11,7 +11,7 @@ experiment = "standard_ensemble"
 program = "ensemble_adapt"
 compilation_parameters = "LIBRARY=seal CONVOLUTION=classical"
 sigmas = ["0.0"]
-ensembles = [2, 4]
+ensembles = [4]
 
 dlogN = {
     "vgg16"   : "15",
