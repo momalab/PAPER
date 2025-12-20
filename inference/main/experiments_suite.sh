@@ -2,10 +2,10 @@
 
 # Define arrays
 # programs=("experiments_standard_accuracy.py" "experiments_full_clustering.py" "experiments_slice_clustering.py" "experiments_ensemble_edclustering.py" "experiments_standard_ensemble.py")
-programs=("experiments_ensemble_edclustering.py")
-models=("resnet32")
+programs=("experiments_standard_accuracy.py" "experiments_full_clustering.py")
+models=("vgg16")
 # datasets=("cifar10" "cifar100" "tiny")
-datasets=("tiny")
+datasets=("cifar10")
 
 # Nested loops
 for dataset in "${datasets[@]}"; do
