@@ -41,19 +41,14 @@ conv2d
     if (bias.front_empty()) throw invalid_argument("bias");
     if (input.size() != kernel[0][0][0].size()) throw "fhe::hw::conv2d: Input channels in input and kernel do not match";
     if (kernel.size() != bias.size()) throw "fhe::hw::conv2d: Output channels in kernel and bias do not match";
-
+    
     const auto& kshape = config.kshape();
-    const auto& padding = config.padding();
-    const auto& mapping = config.mapping();
 
     const auto& co = kshape[0];
     const auto& ci = kshape[1];
     const auto& kh = kshape[2];
     const auto& kw = kshape[3];
-    const auto& ph = padding[0];
-    const auto& pw = padding[1];
     const auto& nCT = config.nct();
-    const int offset = mapping[ph][pw];
     const size_t ksize = kh * kw;
     
     size_t nthreads_ci = min(nthreads, ci);
@@ -81,7 +76,7 @@ conv2d
                         for (size_t k = thr_hw; k < ksize; k += nthreads_hwi)
                         {
                             size_t krow = k / kw, kcol = k % kw;
-                            const int shift = int(mapping[krow][kcol]) - offset;
+                            int shift = config.shift(krow, kcol);
                             shifted_input[k][i] = input[i];
                             Ciphertext::shiftleft_inplace(shifted_input[k][i].vector(), shift);
                         }
@@ -104,7 +99,7 @@ conv2d
     });
     for (auto& thread : threads_ci) thread.join();
     if (exception) rethrow_exception(exception);
-    
+
     size_t nthreads_ew = max(nthreads / (nthreads_co * nthreads_hw), 1UL);
     size_t nthreads_eb = max(nthreads / nthreads_co, 1UL);
     int level = shifted_input[0][0][0].level();
@@ -127,7 +122,7 @@ conv2d
                         for (size_t k = thr_hw; k < ksize; k += nthreads_hw)
                         {
                             size_t krow = k / kw, kcol = k % kw;
-                            const int shift = int(mapping[krow][kcol]) - offset;
+                            int shift = config.shift(krow, kcol);
                             for (size_t i = 0; i < ci; i++)
                             {
                                 auto weight = encode_weight(kernel[o][krow][kcol][i], krow, kcol, shift, config, nthreads_ew, level, keyscale);
@@ -185,17 +180,12 @@ conv2d
     if (kernel[0].size() != bias[0].size()) throw "fhe::hw::conv2d: Output channels in kernel and bias do not match";
 
     const auto& kshape = config.kshape();
-    const auto& padding = config.padding();
-    const auto& mapping = config.mapping();
 
     const auto& co = kshape[0];
     const auto& ci = kshape[1];
     const auto& kh = kshape[2];
     const auto& kw = kshape[3];
-    const auto& ph = padding[0];
-    const auto& pw = padding[1];
     const auto& nCT = config.nct();
-    const int offset = mapping[ph][pw];
     const size_t ksize = kh * kw;
     size_t nModels = kernel.size();
     
@@ -224,7 +214,7 @@ conv2d
                         for (size_t k = thr_hw; k < ksize; k += nthreads_hwi)
                         {
                             size_t krow = k / kw, kcol = k % kw;
-                            const int shift = int(mapping[krow][kcol]) - offset;
+                            int shift = config.shift(krow, kcol);
                             shifted_input[k][i] = input[i];
                             Ciphertext::shiftleft_inplace(shifted_input[k][i].vector(), shift);
                         }
@@ -270,7 +260,7 @@ conv2d
                         for (size_t k = thr_hw; k < ksize; k += nthreads_hw)
                         {
                             size_t krow = k / kw, kcol = k % kw;
-                            const int shift = int(mapping[krow][kcol]) - offset;
+                            int shift = config.shift(krow, kcol);
                             for (size_t i = 0; i < ci; i++)
                             {
                                 vector<Scalar> vs;
