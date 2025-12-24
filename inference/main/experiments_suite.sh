@@ -5,10 +5,10 @@
 programs=("experiments_standard_accuracy.py" "experiments_standard_ensemble.py")
 # models=("vgg16" "resnet18" "resnet20" "resnet32")
 # datasets=("cifar10" "cifar100" "tiny")
-models=("vgg16")
-datasets=("cifar10")
-# models=("resnet32")
-# datasets=("tiny")
+# models=("vgg16")
+# datasets=("cifar10")
+models=("resnet32")
+datasets=("tiny")
 
 # Nested loops
 for dataset in "${datasets[@]}"; do
