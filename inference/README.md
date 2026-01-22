@@ -149,7 +149,7 @@ make resnet18_32x32 MODEL1=resnet18_cifar10_model1.json MODEL2=resnet18_cifar10_
 
 > All model and dataset JSON files must be located in the current directory.
 
-# 📊 Reproducing Private Inference Experiments
+# 📊 Reproduction of Private Inference Results
 
 ...
 Due to large model and dataset sizes, only one example is included.
