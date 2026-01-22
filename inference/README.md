@@ -125,7 +125,7 @@ The program corresponding to the PAPER implementation is `ensemble_adapt`.
 For this program, `make` commands are available to run ResNet models.
 For example, to run ResNet18 with two models, use:
 ```bash
-make resnet18 MODEL1=model1.json MODEL2=model2.json DATASET=dataset.json NITERS=1
+make resnet18_32x32 MODEL1=model1.json MODEL2=model2.json DATASET=dataset.json NITERS=1
 ```
 
 ### Examples
@@ -144,10 +144,13 @@ make resnet18 MODEL1=model1.json MODEL2=model2.json DATASET=dataset.json NITERS=
 
 #### Running Privacy-Preserving Ensemble
 ```bash
-make resnet18 MODEL1=resnet18_cifar10_model1.json MODEL2=resnet18_cifar10_model2.json DATASET=cifar10.json
+make resnet18_32x32 MODEL1=resnet18_cifar10_model1.json MODEL2=resnet18_cifar10_model2.json DATASET=cifar10.json
 ```
 
 > All model and dataset JSON files must be located in the current directory.
 
+# 📊 Reproducing Private Inference Experiments
+
+...
 Due to large model and dataset sizes, only one example is included.
 For the complete set of models and datasets used in the paper, see the instructions in [Reproduction of Results](../README.md#reproduction-of-results).
