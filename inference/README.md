@@ -96,21 +96,21 @@ where `<program>` is the target program name, and `[PARAMETERS]` are optional bu
 
 # 🚀 Running Programs
 
-To view available arguments for any program, simply run it without arguments:
+To view the arguments for any program, simply run it without arguments:
 ```bash
 ./program.exe
 ```
 
 ### Command-Line Arguments:
-* `<model.json>`: JSON file defining the model. Multiple files may be provided for ensembles,
+* `<model.json>`: JSON file defining the model. Multiple files may be provided for ensembles.
 * `<input.json>`: JSON file with input data for inference.
 * `|N|`: $\log_2$ of the polynomial degree $N$.
-* `|scale`: $\log_2$ of the scaling factor $\Delta$.
+* `|scale|`: $\log_2$ of the scaling factor $\Delta$.
 * `|q0|,|q1|,...|qL|,|P|`: Bit sizes of the RNS moduli.
 
     Example: `1x54,1x23,18x44` → $|P| = 54$, $|q_L| = 23$, and $|q_{L-1}| = ... = |q_0| = 44$.
 
-* `<rotation_steps>`: Galois key rotation steps (comma-separated, no spaces). Example: `1,2,4,8,16,24,31,32,64,-1,-2,-4,-8,-16,-32`.
+* `<rotation_steps>`: Galois keys for rotation steps (comma-separated, no spaces). Example: `1,2,4,8,16,24,31,32,64,-1,-2,-4,-8,-16,-32`.
 * `[# iterations]` Optional number of inference runs (default: all input entries in `<input.json>`).
 
 **Program-specific argument notes:**
@@ -121,8 +121,8 @@ To view available arguments for any program, simply run it without arguments:
 * `naive` and `adapt` programs require FHE-specific parameters.
 * `<rotation_steps>` are used in `adapt` programs only.
 
-The program corresponding to the PAPER implementation is ensemble_adapt.
-For this program, make commands are available to run ResNet models.
+The program corresponding to the PAPER implementation is `ensemble_adapt`.
+For this program, `make` commands are available to run ResNet models.
 For example, to run ResNet18 with two models, use:
 ```bash
 make resnet18 MODEL1=model1.json MODEL2=model2.json DATASET=dataset.json NITERS=1
