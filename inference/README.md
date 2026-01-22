@@ -21,6 +21,7 @@ It may work with older versions or other environments, but these have not been v
 | Python        | 3.10.12         |
 | NumPy         | 1.26.4          |
 | 7-Zip         | 23.01           |
+| curl          | 8.5.0           |
 
 To install the required packages on Ubuntu:
 
