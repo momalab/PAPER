@@ -443,20 +443,20 @@ bash src/organize_jsons_for_inference.sh cifar10 resnet18
 
 **Outputs**
 
-After successful execution, all JSON files required for C++ inference are organized into the following directory structure located outside the training directory:
+  * After successful execution, all JSON files required for C++ inference are organized into the following directory structure located outside the training directory:
 
-```
-../resources/
-└── json_files/
-    ├── datasets/
-    │   └── cifar10/
-    │       └── <dataset_sample_jsons>.json
-    └── models/
-        └── cifar10_resnet18/
-            ├── standard/
-            │   └── <standard_and_ensemble_jsons>.json
-            ├── full_clustering/
-            │   └── <full_clustered_model_jsons>.json
-            └── slice_clustering/
-                └── <slice_and_ensemble_clustered_jsons>.json
-```
+    ```
+    ../resources/
+    └── json_files/
+        ├── datasets/
+        │   └── cifar10/
+        │       └── <dataset_sample_jsons>.json
+        └── models/
+            └── cifar10_resnet18/
+                ├── standard/
+                │   └── <standard_and_ensemble_jsons>.json
+                ├── full_clustering/
+                │   └── <full_clustered_model_jsons>.json
+                └── slice_clustering/
+                    └── <slice_and_ensemble_clustered_jsons>.json
+    ```
