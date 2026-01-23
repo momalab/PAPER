@@ -1,4 +1,4 @@
-# PAPER: Privacy-Presering ResNet Models using Low-Degree Polynomial Approximations and Structural Optimizations on Leveled FHE
+# PAPER: Privacy-Preserving Convolutional Neural Networks using Low-Degree Polynomial Approximations and Structural Optimizations on Leveled FHE
 
 Description.
 
