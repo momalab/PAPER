@@ -3,6 +3,11 @@ import os
 
 program = "python3 experiment.py"
 
+all_dataset_model_pairs = [
+    "cifar10_vgg16", "cifar10_resnet18", "cifar10_resnet20", "cifar10_resnet32",
+    "cifar100_resnet18", "cifar100_resnet20", "cifar100_resnet32", "tiny_resnet32"
+]
+
 def parse_args():
     parser = argparse.ArgumentParser(
         description="Reproduce PAPER experiments with configurable parameters.",
@@ -95,11 +100,6 @@ def run(dataset, model, method, mode, args):
             os.system(cmd)
             skip_compilation = True
 
-dataset_model_pairs = [
-    "cifar10_vgg16", "cifar10_resnet18", "cifar10_resnet20", "cifar10_resnet32",
-    "cifar100_resnet18", "cifar100_resnet20", "cifar100_resnet32", "tiny_resnet32"
-]
-
 def reproduce(args):
     datasets = ["cifar10", "cifar100", "tiny"] if args.dataset == "all" else [args.dataset]
     models = ["vgg16", "resnet18", "resnet20", "resnet32"] if args.model == "all" else [args.model]
@@ -107,7 +107,7 @@ def reproduce(args):
     modes = ["accuracy", "time"] if args.mode == "both" else [args.mode]
     for dataset in datasets:
         for model in models:
-            if f"{dataset}_{model}" in dataset_model_pairs:
+            if f"{dataset}_{model}" in all_dataset_model_pairs:
                 for method in methods:
                     for mode in modes:
                         run(dataset, model, method, mode, args)

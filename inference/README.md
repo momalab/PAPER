@@ -204,7 +204,7 @@ The logfile contains the execution log and the measured inference time.
 ## Running Multiple Cases
 
 The `reproduce.py` script invokes `experiment.py` to execute a series of experiments.
-To run all experiments in **PAPER**, execute:
+To run all experiments in **PAPER** (this may take several days), execute:
 
 ```bash
 python3 reproduce.py --path ../../resources/reproducibility/
