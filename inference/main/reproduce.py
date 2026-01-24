@@ -25,15 +25,6 @@ def parse_args():
         help="Path to the root directory containing JSON models and datasets."
     )
 
-    # # Evaluation: minimal / quick / normal
-    # parser.add_argument(
-    #     "--evaluation", "-E",
-    #     type=str,
-    #     choices=["minimal", "quick", "normal"],
-    #     default="normal",
-    #     help="Define how many iterations in time experiments: {minimal, quick, normal}."
-    # )
-
     # Mode: accuracy / time / both
     parser.add_argument(
         "--mode", "-e",
@@ -74,7 +65,6 @@ def parse_args():
     parser.add_argument(
         "--niters_accuracy", "-A",
         type=int,
-        # default=-1,
         default=100,
         help="Number of iterations/inferences to perform accuracy evaluation. If 0, run for all entries. (default: 100)"
     )
@@ -88,20 +78,6 @@ def parse_args():
     )
 
     args = parser.parse_args()
-
-    # if args.niters_accuracy == -1:
-    #     args.niters_accuracy = {
-    #         "minimal": 100,
-    #         "quick": 500,
-    #         "normal": 5000
-    #     }[args.evaluation]
-
-    # if args.niters_time == -1:
-    #     args.niters_time = {
-    #         "minimal": 1,
-    #         "quick": 3,
-    #         "normal": 5
-    #     }[args.evaluation]
     
     return args
 
@@ -115,7 +91,6 @@ def run(dataset, model, method, mode, args):
             nclusters = [2**i for i in (range(6,14) if m > 1 else range(1,11))]
         for k in nclusters:
             cmd = f"{program} {'-s ' if skip_compilation else ''}--path {args.path} --mode {mode} --dataset {dataset} --model {model} --method {method} -M {m} -K {k} --niters {niters}"
-            cmd += " --library mockup" # debug - remove
             print(cmd)
             os.system(cmd)
             skip_compilation = True
