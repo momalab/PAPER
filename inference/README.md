@@ -26,7 +26,7 @@ It may work with older versions or other environments, but these have not been v
 To install the required packages on Ubuntu:
 
 ```bash
-sudo apt install make cmake git gcc g++ libgmp-dev nlohmann-json3-dev python3 python3-numpy p7zip-full
+sudo apt install make cmake git gcc g++ libgmp-dev nlohmann-json3-dev python3 python3-numpy p7zip-full curl
 ```
 
 ### Microsoft SEAL Library
@@ -150,8 +150,86 @@ make resnet18_32x32 MODEL1=resnet18_cifar10_model1.json MODEL2=resnet18_cifar10_
 
 > All model and dataset JSON files must be located in the current directory.
 
+Due to large model and dataset sizes, only one example is included.
+For the complete set of models and datasets used in the paper, see the instructions below.
+
 # 📊 Reproduction of Results
 
-...
-Due to large model and dataset sizes, only one example is included.
-For the complete set of models and datasets used in the paper, see the instructions in [Reproduction of Results](../README.md#reproduction-of-results).
+This section describes how to reproduce the results reported in the evaluation of private inference in **PAPER**.
+
+All experiments were conducted on a machine equipped with two AMD EPYC 64-core processors and 2 TB of RAM across 32 DDR4 DIMMs (2933 MT/s), running Ubuntu 22.04.5 LTS.
+
+## Downloading Models and Datasets
+
+We provide the models and datasets used in our experiments to facilitate reproduction of results.
+
+From the root of this repository, run:
+
+```bash
+cd resources
+bash download_models_and_datasets.sh
+```
+
+This script downloads a 13.4 GB ZIP archive containing all models and datasets used in the experiments. We recommend having at least **30 GB of free disk space** to allow for file extraction and organization.
+
+After extraction, the script creates a `reproducibility` directory containing:
+
+* `datasets`: CIFAR-10, CIFAR-100, and Tiny-ImageNet
+* `models`:
+
+  * VGG-16 on CIFAR-10
+  * ResNet-18 and ResNet-20 on CIFAR-10 and CIFAR-100
+  * ResNet-32 on CIFAR-10, CIFAR-100, and Tiny-ImageNet
+
+Each dataset and model is stored as a `.7z` file to reduce storage requirements.
+
+## Running a Single Case
+
+To run an individual experiment, use the `experiment.py` script. For a full list of arguments, run:
+
+```bash
+python3 experiment.py --help
+```
+
+As an example, to measure the private inference time of ResNet-18 on CIFAR-10, with no ensemble ($M=1$) and *Slice Clustering* with $K=64$ clusters, run:
+
+```bash
+python3 experiment.py --path ../../resources/reproducibility/ --dataset cifar10 --model resnet18 --method slice_clustering -M 1 -K 64
+```
+
+This command generates a logfile named `cifar10_resnet18_slice_clustering_M_1_K_64_runtime.log` located in `resources/reproducibility/models/cifar10_resnet18/slice_clustering`.
+
+The logfile contains the execution log and the measured inference time.
+
+## Running Multiple Cases
+
+The `reproduce.py` script invokes `experiment.py` to execute a series of experiments.
+To run all experiments in **PAPER**, execute:
+
+```bash
+python3 reproduce.py --path ../../resources/reproducibility/
+```
+
+You can optionally restrict the experiments by dataset, model, and method. For example:
+
+```bash
+python3 reproduce.py --path ../../resources/reproducibility/ --dataset cifar10 --model resnet18 --method slice_clustering
+```
+
+This runs all *Slice Clustering* experiments for ResNet-18 on CIFAR-10.
+Check `python3 reproduce.py --help` for additional options.
+
+**Note**: By default, the experiments report inference time and peak memory. Accuracy can also be evaluated using private inference; however, this requires a large number of iterations per case, making exhaustive evaluation across all cases prohibitively slow. We therefore recommend sampling a subset of cases to verify that the accuracy is consistent with the results reported in the plaintext evaluation.
+
+## Consolidating Results
+
+To aggregate the results into an easy-to-read format, use the consolidation script:
+
+```bash
+python3 consolidate.py --path ../../resources/reproducibility/ --dataset cifar10 --model resnet18
+```
+This creates two files with tabulated results in `resources/reproducibility/`: `cifar10_resnet18_runtime.log` for inference time and `cifar10_resnet18_memory.log` for peak memory.
+
+If the dataset and model are not specified, the script consolidates results for all available cases.
+
+**Note:** By default, each experiment is executed once per configuration. To compute statistics such as standard deviation, run experiments with multiple iterations (e.g., `-n 5`).

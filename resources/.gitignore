@@ -3,4 +3,5 @@ json_files/
 *.7z
 *.7z.*
 *.json
+*.log
 LICENSE
