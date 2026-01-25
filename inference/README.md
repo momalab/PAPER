@@ -170,7 +170,7 @@ cd resources
 bash download_models_and_datasets.sh
 ```
 
-This script downloads a 13.4 GB ZIP archive containing all models and datasets used in the experiments. We recommend having at least **30 GB of free disk space** to allow for file extraction and organization.
+This script downloads a 14.3 GB ZIP archive containing all models and datasets used in the experiments. We recommend having at least **30 GB of free disk space** to allow for file extraction and organization.
 
 After extraction, the script creates a `reproducibility` directory containing:
 
