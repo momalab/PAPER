@@ -45,12 +45,14 @@ COEFF_DIR = 'poly_coeffs'
 
 num_classes_map = {
     'cifar10': 10,
-    'cifar100': 100
+    'cifar100': 100,
+    'tiny': 200
 }
 
 dataset_map = {
     'cifar10': (datasets.CIFAR10, './data'),
-    'cifar100': (datasets.CIFAR100, './data')
+    'cifar100': (datasets.CIFAR100, './data'),
+    'tiny': (datasets.ImageFolder, './data/tiny-imagenet-200'),
 }
 
 CLUSTERING_SEEDS = [20168, 2907, 11621, 30149, 17797]

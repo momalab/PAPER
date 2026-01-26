@@ -96,7 +96,7 @@ def validate(epoch, model, validloader, best_acc, model_path, args):
         best_acc (float): Best validation accuracy so far.
         model_path (str): Directory where model checkpoints are saved.
         args (argparse.Namespace): Experiment configuration with
-            seed (int): Seed that selects which checkpoint to load.
+        seed (int): Seed that selects which checkpoint to load.
 
     Returns:
         tuple: (float, float): Current validation accuracy and updated best accuracy.

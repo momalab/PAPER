@@ -37,6 +37,20 @@ DATASET_TRANSFORMS = {
             transforms.ToTensor(),
             transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))
         ])
+    },
+    "tiny": {
+        "train": transforms.Compose([
+            transforms.Resize((64, 64)),
+            transforms.RandomCrop(64, padding=4),
+            transforms.RandomHorizontalFlip(),
+            transforms.ToTensor(),
+            transforms.Normalize((0.4802, 0.4481, 0.3975), (0.2770, 0.2691, 0.2821))
+        ]),
+        "test": transforms.Compose([
+            transforms.Resize((64, 64)),
+            transforms.ToTensor(),
+            transforms.Normalize((0.4802, 0.4481, 0.3975), (0.2770, 0.2691, 0.2821))
+        ])
     }
 }
 
@@ -71,9 +85,14 @@ def get_datasets(dataset, transform_train, transform_test):
     if dataset not in dataset_map:
         raise ValueError(f"Unknown dataset: {dataset}")
 
+    # Tiny ImageNet-style datasets use separate train/test directories
     ds, root = dataset_map[dataset]
-    trainset = ds(root=root, train=True, download=True, transform=transform_train)
-    testset = ds(root=root, train=False, download=True, transform=transform_test)
+    if dataset in ["tiny"]:
+        trainset = ds(root=f"{root}/train", transform=transform_train)
+        testset = ds(root=f"{root}/val", transform=transform_test)
+    else:
+        trainset = ds(root=root, train=True, download=True, transform=transform_train)
+        testset = ds(root=root, train=False, download=True, transform=transform_test)
 
     return trainset, testset
 

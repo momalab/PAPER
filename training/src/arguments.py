@@ -7,8 +7,8 @@ def parse_arguments():
 
     Returns:
         argparse.Namespace: Object with attributes
-            dataset (str): Name of the dataset. Valid options are 'cifar10' and 'cifar100'.
-            model (str): Model architecture name. Use 'resnet18', 'resnet20', or 'resnet32' for training with ReLU. 
+            dataset (str): Name of the dataset. Valid options are 'cifar10', 'cifar100', or 'tiny'.
+            model (str): Model architecture name. Use 'resnet18', 'resnet20', 'resnet32', or 'vgg16' for training with ReLU. 
                          Append '_poly' to use the corresponding model with polynomial activations, for example 'resnet18_poly'.
             num_epochs (int): Number of training epochs.
             batch_size_train (int): Batch size for training.
@@ -34,10 +34,10 @@ def parse_arguments():
     """
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('--dataset', type=str, choices=['cifar10', 'cifar100'])
+    parser.add_argument('--dataset', type=str, choices=['cifar10', 'cifar100', 'tiny'])
     parser.add_argument('--model', type=str, choices=[
-        'resnet18', 'resnet20', 'resnet32',
-        'resnet18_poly', 'resnet20_poly', 'resnet32_poly'
+        'resnet18', 'resnet20', 'resnet32', 'vgg16',
+        'resnet18_poly', 'resnet20_poly', 'resnet32_poly', 'vgg16_poly'
     ])
     parser.add_argument('--num_epochs', type=int, default=185)
     parser.add_argument('--batch_size_train', type=int, default=128)

@@ -1,5 +1,5 @@
 # 📑 Overview
-This repository provides a complete experimental framework for training, evaluating, and compressing deep neural networks that use polynomial activation functions instead of conventional ReLU activations. It supports ResNet architectures on CIFAR-10 and CIFAR-100 datasets and provides end-to-end tools for polynomial coefficient generation, model training, clustering, and evaluation.
+This repository provides a complete experimental framework for training, evaluating, and compressing deep neural networks that use polynomial activation functions instead of conventional ReLU activations. It supports ResNet and VGG architectures on CIFAR-10, CIFAR-100, and Tiny-ImageNet datasets. It provides end-to-end tools for polynomial coefficient generation, model training, clustering, and evaluation.
 
 # 🖥️ System Requirements
 
@@ -22,6 +22,17 @@ source paper/bin/activate
 pip install -r requirements.txt
 pip install -r requirements_pytorch.txt
 ```
+
+# 📦 Dataset Preparation
+This project supports three image classification benchmarks: `CIFAR10`, `CIFAR100`, and `Tiny-ImageNet`.
+
+- When either `cifar10` or `cifar100` is selected via the `--dataset` argument, the dataset is automatically downloaded using the PyTorch dataset utilities and cached locally in the `./data/` directory.
+- Download the Tiny-ImageNet 64×64 dataset from the official ImageNet website: https://www.image-net.org/. After downloading, extract it into the `./data/` directory with the following structure:
+  ```
+  ./data/tiny-imagenet-200/
+  ├── train/
+  └── val/
+  ```
 
 # 🚀 Experiment Workflow Overview
 
@@ -48,7 +59,7 @@ Details of all command line arguments are mentioned in `arguments.py`.
 
 ### Model Training
 
-The framework supports training ResNet models (e.g., Resnet-18, Resnet-20, Resnet-32) on CIFAR-10 and CIFAR-100 datasets with ReLU activations. This example demonstrates training ResNet-18 on CIFAR-10 using five random seeds, which can be run in parallel across multiple GPUs or compute nodes for faster processing. 
+The framework supports training ResNet models (e.g., Resnet-18, Resnet-20, Resnet-32) on CIFAR-10, CIFAR-100, and Tiny-ImageNet datasets with ReLU activations. This example demonstrates training ResNet-18 on CIFAR-10 using five random seeds, which can be run in parallel across multiple GPUs or compute nodes for faster processing. 
 
 > **Note:** For subsequent experiments such as ensembling and clustering, at least four independently trained models are required.
 

@@ -1,5 +1,6 @@
 import torch
 from resnet import resnet18, resnet20, resnet32
+from vgg import ModulusNet_vgg16_bn
 from utils import num_classes_map
 
 
@@ -18,11 +19,13 @@ def get_model(args):
     arch = args.model.lower()
     num_classes = num_classes_map[args.dataset]
     if "resnet18" in arch:
-        return resnet18(num_classes)
+        return resnet18(num_classes, args.dataset)
     elif "resnet20" in arch:
-        return resnet20(num_classes)
+        return resnet20(num_classes, args.dataset)
     elif "resnet32" in arch:
-        return resnet32(num_classes)
+        return resnet32(num_classes, args.dataset)
+    elif "vgg16" in arch:
+        return ModulusNet_vgg16_bn(num_classes, args.dataset)
     else:
         raise ValueError(f"Unknown model_arch: {args.model}")
 

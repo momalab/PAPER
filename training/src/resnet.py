@@ -59,55 +59,8 @@ class BasicBlock(nn.Module):
         return out
 
 
-class Bottleneck(nn.Module):
-    """
-    Bottleneck residual block used in deeper ResNets (e.g., ResNet-50, ResNet-101, ResNet-152).
-    """
-    expansion = 4
-
-    def __init__(self, in_planes, planes, stride=1):
-        """
-        Args:
-            in_planes (int): Number of input channels.
-            planes (int): Number of base output channels before expansion.
-            stride (int, optional): Stride for the 3x3 convolution. Default: 1.
-        """
-        super(Bottleneck, self).__init__()
-        self.conv1 = nn.Conv2d(in_planes, planes, kernel_size=1, bias=False)
-        self.bn1 = nn.BatchNorm2d(planes)
-        self.conv2 = nn.Conv2d(planes, planes, kernel_size=3, stride=stride, padding=1, bias=False)
-        self.bn2 = nn.BatchNorm2d(planes)
-        self.conv3 = nn.Conv2d(planes, self.expansion * planes, kernel_size=1, bias=False)
-        self.bn3 = nn.BatchNorm2d(self.expansion*planes)
-        self.relu = nn.ReLU()
-
-        self.shortcut = nn.Sequential()
-        if stride != 1 or in_planes != self.expansion*planes:
-            self.shortcut = nn.Sequential(
-                nn.Conv2d(in_planes, self.expansion*planes, kernel_size=1, stride=stride, bias=False),
-                nn.BatchNorm2d(self.expansion*planes)
-            )
-
-    def forward(self, x):
-        """
-        Forward pass of the bottleneck block.
-
-        Args:
-            x (torch.Tensor): Input feature map.
-
-        Returns:
-            torch.Tensor: Output feature map after residual addition.
-        """
-        out = self.relu(self.bn1(self.conv1(x)))
-        out = self.relu(self.bn2(self.conv2(out)))
-        out = self.bn3(self.conv3(out))
-        out += self.shortcut(x)
-        out = self.relu(out)
-        return out
-
-
 class ResNet(nn.Module):
-    def __init__(self, block, num_blocks, num_classes):
+    def __init__(self, block, num_blocks, num_classes, dataset):
         """
         General ResNet architecture.
 
@@ -115,8 +68,7 @@ class ResNet(nn.Module):
             block (nn.Module): Residual block type (BasicBlock or Bottleneck).
             num_blocks (list[int]): Number of blocks in each of the 4 layers.
             num_classes (int): Number of output classes.
-            resnet20 (bool, optional): Whether this is ResNet-20 (CIFAR style).
-            resnet32 (bool, optional): Whether this is ResNet-32 (CIFAR style).
+            dataset (str): Dataset identifier used to configure pooling size.
         """
         super(ResNet, self).__init__()
         self.in_planes = 64
@@ -131,10 +83,15 @@ class ResNet(nn.Module):
         self.layer4 = self._make_layer(block, 512, num_blocks[3], stride=2)
         
         self.relu = nn.ReLU()
-        pool_size = 4
+
+        # Dataset-dependent average pooling
+        if dataset == "tiny":
+            pool_size = 8
+        else:
+            pool_size = 4
         self.avg_pool = nn.AvgPool2d(kernel_size=pool_size, stride=pool_size, padding=0)
 
-        if num_blocks[3] == 0:  # For ResNet-20 and ResNet-32 (CIFAR style)
+        if num_blocks[3] == 0:  # For ResNet-20 and ResNet-32
             self.linear = nn.Linear(256 * 2 * 2, num_classes)
         else: # For standard ResNets
             self.linear = nn.Linear(512 * block.expansion, num_classes)
@@ -183,36 +140,16 @@ class ResNet(nn.Module):
 
 # Factory functions for ResNet variants
 
-def resnet18(num_classes):
+def resnet18(num_classes, dataset):
     """Construct ResNet-18."""
-    return ResNet(BasicBlock, [2, 2, 2, 2], num_classes)
+    return ResNet(BasicBlock, [2, 2, 2, 2], num_classes, dataset)
 
 
-def resnet20(num_classes):
-    """Construct ResNet-20 (CIFAR version)."""
-    return ResNet(BasicBlock, [3, 3, 3, 0], num_classes)
+def resnet20(num_classes, dataset):
+    """Construct ResNet-20."""
+    return ResNet(BasicBlock, [3, 3, 3, 0], num_classes, dataset)
 
 
-def resnet32(num_classes):
-    """Construct ResNet-32 (CIFAR version)."""
-    return ResNet(BasicBlock, [5, 5, 5, 0], num_classes)
-
-
-def resnet34(num_classes):
-    """Construct ResNet-34."""
-    return ResNet(BasicBlock, [3, 4, 6, 3], num_classes)
-
-
-def resnet50(num_classes):
-    """Construct ResNet-50."""
-    return ResNet(Bottleneck, [3, 4, 6, 3], num_classes)
-
-
-def resnet101(num_classes):
-    """Construct ResNet-101."""
-    return ResNet(Bottleneck, [3, 4, 23, 3], num_classes)
-
-
-def resnet152(num_classes):
-    """Construct ResNet-152."""
-    return ResNet(Bottleneck, [3, 8, 36, 3], num_classes)
+def resnet32(num_classes, dataset):
+    """Construct ResNet-32."""
+    return ResNet(BasicBlock, [5, 5, 5, 0], num_classes, dataset)
