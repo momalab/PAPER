@@ -6,19 +6,21 @@ import subprocess
 program = "ensemble_adapt"
 
 logN = {
+    "vgg16"   : "15",
     "resnet18": "15",
     "resnet20": "15",
     "resnet32": "16"
 }
 
 scale = {
+    "vgg16"   : "25",
     "resnet18": "22",
     "resnet20": "21",
     "resnet32": "26"
 }
  
 moduli = {
-    "vgg16": "6x50,10x49,1x26,1x54",
+    "vgg16"   : "6x50,10x49,1x26,1x54",
     "resnet18": "18x44,1x23,1x54",
     "resnet20": "20x42,1x22,1x44",
     "resnet32": "32x52,1x27,1x54"
@@ -71,8 +73,10 @@ def extract_seed(model_file):
 
 def fancy(text):
     return {
-        "cifar10" : "CIFAR-10",
+        "cifar10"  : "CIFAR-10",
         "cifar100" : "CIFAR-100",
+        "tiny"     : "Tiny-ImageNet",
+        "vgg16"    : "VGG-16",
         "resnet18" : "ResNet-18",
         "resnet20" : "ResNet-20",
         "resnet32" : "ResNet-32",
@@ -125,8 +129,8 @@ def parse_args():
         "--mode", "-e",
         type=str,
         choices=["accuracy", "time", "both"],
-        required=True,
-        help="Tells which data to collect: {accuracy, time, both}."
+        default="time",
+        help="Tells which data to collect: {accuracy, time, both}. (default: time)"
     )
 
     # Dataset: cifar10 / cifar100 / tiny
@@ -176,8 +180,8 @@ def parse_args():
     parser.add_argument(
         "--niters", "-n",
         type=int,
-        default=0,
-        help="Number of iterations/inferences to perform. If 0 or not set, run for all entries."
+        default=1,
+        help="Number of iterations/inferences to perform. If 0, run for all entries. (default: 1)"
     )
 
     # Convolution : classical / map / mapmem
@@ -305,7 +309,7 @@ def run(args):
 
 if __name__ == "__main__":
     args = parse_args()
-    print(args)
+    # print(args)
     # print("Arguments:")
     # for key, value in vars(args).items():
     #     print(f"  {key}: {value}")
