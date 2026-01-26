@@ -7,7 +7,6 @@ This repository contains the reference implementation for _PAPER: Privacy-Preser
 - `training/`: Model training, evaluation, and clustering
 - `inference/`: Privacy-preserving inference using LFHE 
 - `resources/`: Training outputs (models and datasets) for inference and reproducibility
-- `README.md`: This file. Project overview and top-level documentation.
 
 # 🛠️ Training
 
