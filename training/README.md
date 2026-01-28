@@ -1,5 +1,5 @@
 # 📑 Overview
-This repository provides a complete experimental framework for training, evaluating, and compressing deep neural networks that use polynomial activation functions instead of conventional ReLU activations. It supports ResNet and VGG architectures on CIFAR-10, CIFAR-100, and Tiny-ImageNet datasets. It provides end-to-end tools for polynomial coefficient generation, model training, clustering, and evaluation.
+This repository provides a complete experimental framework for training, evaluating, and compressing deep convolutional neural networks that use polynomial activation functions. It supports ResNet and VGG architectures on CIFAR and Tiny-ImageNet datasets, with end-to-end tools for polynomial coefficient generation, regularized training, model fusion, ensembling, parameter clustering, and deployment-ready JSON export for inference.
 
 # 🖥️ System Requirements
 
@@ -9,7 +9,7 @@ This repository provides a complete experimental framework for training, evaluat
 
 # 🛠️ Setup and Installation
 
-### Create and Activate Virtual Environment
+### Create and Activate a Virtual Environment
 
 ```bash
 python -m venv paper
@@ -22,44 +22,55 @@ source paper/bin/activate
 pip install -r requirements.txt
 pip install -r requirements_pytorch.txt
 ```
+> **Note:** Ensure your CUDA toolkit and NVIDIA drivers are properly installed and compatible with the PyTorch version specified in requirements_pytorch.txt.
 
 # 📦 Dataset Preparation
 This project supports three image classification benchmarks: `CIFAR10`, `CIFAR100`, and `Tiny-ImageNet`.
 
-- When either `cifar10` or `cifar100` is selected via the `--dataset` argument, the dataset is automatically downloaded using the PyTorch dataset utilities and cached locally in the `./data/` directory.
-- Download the Tiny-ImageNet 64×64 dataset from the official ImageNet website: https://www.image-net.org/. After downloading, extract it into the `./data/` directory with the following structure:
+- When `cifar10` or `cifar100` is specified via the `--dataset` argument, the dataset is automatically downloaded using the PyTorch dataset utilities and cached locally in the `./data/` directory.
+- Download the Tiny-ImageNet (64x64) dataset from the official ImageNet website: https://www.image-net.org/. After downloading, extract it into the `./data/` directory with the following structure:
   ```
   ./data/tiny-imagenet-200/
   ├── train/
+  │   ├── n01443537/
+  │   ├── n01629819/
+  │   ├── n01641577/
+  │   └── ...
   └── val/
+      ├── n01443537/
+      ├── n01629819/
+      ├── n01641577/
+      └── ...
   ```
 
-# 🚀 Experiment Workflow Overview
+# 🚀 Experiment Workflow
 
-## 1. Polynomial Coefficient Generation
+## 1️⃣ Polynomial Coefficient Generation
 
-This step computes the polynomial activation coefficients that approximate the ReLU function using polynomial regression.
+This step computes fixed-point polynomial activation coefficients that approximate the ReLU function using quantization-aware regression.
 
 ```bash
 python src/polyfit.py --degree 2 --clip 2 --pbit 10
 ```
 
-Details of all command line arguments are mentioned in `arguments.py`.
+Details of all command line arguments are documented in `arguments.py`.
 
 **Outputs:**
 
-* The generated coefficients from this configuration are stored under:
+* The generated coefficients are stored under:
 
   ```
   artifacts/poly_coeffs/
   └──deg_2_clip_2_pbit_10_coeffs.txt
   ```
 
-## 2. Baseline Model Training (ReLU Network)
+## 2️⃣ Baseline Model Training
 
-### Model Training
+Baseline models use standard ReLU activations and serve as reference points for accuracy and stability comparisons.
 
-The framework supports training ResNet models (e.g., Resnet-18, Resnet-20, Resnet-32) on CIFAR-10, CIFAR-100, and Tiny-ImageNet datasets with ReLU activations. This example demonstrates training ResNet-18 on CIFAR-10 using five random seeds, which can be run in parallel across multiple GPUs or compute nodes for faster processing. 
+### 2.1 Training
+
+The framework supports ResNet (e.g., Resnet-18, Resnet-20, Resnet-32) and VGG16 on CIFAR-10, CIFAR-100, and Tiny-ImageNet. This example demonstrates training ResNet-18 on CIFAR-10 using five random seeds. 
 
 > **Note:** For subsequent experiments such as ensembling and clustering, at least four independently trained models are required.
 
@@ -92,9 +103,9 @@ python src/training.py --dataset cifar10 --model resnet18 --seed 27452
   └──log_seed_<seed>.log
   ```
 
-### Model Evaluation
+### 2.2 Evaluation
 
-This step evaluates each trained models and computes statistical performance metrics aggregated over the provided seeds.
+This step evaluates trained baseline models and computes statistical performance metrics aggregated over the specified random seeds.
 
 ```bash
 python src/compute_accuracy.py --dataset cifar10 --model resnet18 --seed_list 12099 12911 18144 18573 27452
@@ -109,11 +120,13 @@ python src/compute_accuracy.py --dataset cifar10 --model resnet18 --seed_list 12
   └──accuracy_summary.log
   ```
 
-## 3. Polynomial Activation Model Training
+## 3️⃣ Polynomial Activation Model Training
 
-### Model Training
+This stage trains networks with polynomial activation functions as a replacement for ReLU using regularized objectives.
 
-The framework supports training ResNet architectures with polynomial activation functions as a replacement for ReLU. The example below demonstrates independent training using five random seeds, which can be run in parallel across multiple GPUs or compute nodes  for faster processing.
+### 3.1 Training
+
+The example below demonstrates independent training using five random seeds.
 
 ```bash
 python src/training.py --dataset cifar10 --model resnet18_poly --degree 2 --clip 2 --pbit 10 --penalty 0.001 --seed 12099
@@ -145,9 +158,9 @@ python src/training.py --dataset cifar10 --model resnet18_poly --degree 2 --clip
   └──log_seed_<seed>.log
   ```
 
-### Model Evaluation
+### 3.2 Evaluation
 
-This step evaluates each trained model and computes statistical performance metrics aggregated over the provided seeds.
+This step evaluates trained model and computes statistical performance metrics aggregated over the specified random seeds.
 
 ```bash
 python src/compute_accuracy.py --dataset cifar10 --model resnet18_poly --degree 2 --clip 2 --pbit 10 --penalty 0.001 --seed_list 12099 12911 18144 18573 27452
@@ -162,8 +175,8 @@ python src/compute_accuracy.py --dataset cifar10 --model resnet18_poly --degree 
   └──accuracy_summary_degree_2_clip_2_pbit_10_zeta_0.001_sigma_<sigma>.log
   ```
 
-## 4. Fuse Batch Normalization and Convolution Layers
-This step fuses Batch Normalization layers with Convolutional layers to simplify the model for inference. The fusion is applied after training is completed.
+## 4️⃣ Fuse Batch Normalization and Convolution Layers
+This step fuses Batch Normalization layers into adjacent Convolutional layers to simplify the model for inference. The fusion is applied after training is completed.
 
 ```bash
 python src/fuse_models.py --dataset cifar10 --model resnet18_poly --degree 2 --clip 2 --pbit 10 --penalty 0.001 --seed_list 12099 12911 18144 18573 27452
@@ -182,11 +195,11 @@ python src/fuse_models.py --dataset cifar10 --model resnet18_poly --degree 2 --c
   ```
   artifacts/results_logs/fusing_logs/cifar10_resnet18_poly/
   └──logs_degree_2_clip_2_pbit_10_zeta_0.001_sigma_<sigma>.log
+  ```
 
+## 5️⃣ Ensemble Inference
 
-## 5. Ensemble Inference
-
-This step evaluates ensembles created by combining predictions from multiple independently trained models using polynomial activations. The example below demonstrates ensemble evaluation with 2 and 4 models, which can be run in parallel across multiple GPUs or compute nodes to accelerate inference.
+This step evaluates ensembles formed by combining predictions from multiple independently trained models using polynomial activations. The example below demonstrates ensemble evaluation with 2 and 4 models.
 
 ```bash
 python src/ensemble_inference.py --dataset cifar10 --model resnet18_poly --degree 2 --clip 2 --pbit 10 --penalty 0.001 --seed_list 12099 12911 18144 18573 27452 --num_models 2
@@ -203,10 +216,12 @@ python src/ensemble_inference.py --dataset cifar10 --model resnet18_poly --degre
   └──logs_degree_2_clip_2_pbit_10_zeta_0.001_sigma_<sigma>_num_models_<num_models>.log
   ```
 
-## 6. Convolutional Parameter Clustering
+## 6️⃣ Convolutional Parameter Clustering
 This stage applies *K-means clustering* to convolutional layer parameters to reduce model size by grouping similar weights into representative clusters. Two clustering modes are supported: **full-parameter clustering** and **slice-wise clustering**. 
 
 ### 6.1 Full-Parameter Clustering
+
+#### 6.1.1 Clustering
 
 In this mode, clustering is applied globally across all convolutional layer weights within each trained model. The example below demonstrates full-parameter clustering executed across five independently trained models and a range of cluster sizes (`k = 2` to `k = 1024`).
 
@@ -217,8 +232,6 @@ for seed in 12099 12911 18144 18573 27452; do
   done
 done
 ```
-
-Each (`seed`, `k`) combination represents an independent clustering experiment that can be executed in parallel across multiple GPUs or compute nodes for faster experimentation.
 
 **Outputs:**
 
@@ -237,6 +250,8 @@ Each (`seed`, `k`) combination represents an independent clustering experiment t
   └──logs_degree_2_clip_2_pbit_10_zeta_0.001_sigma_<sigma>_seed_<seed>_full_k_<k>.log
   ```
 
+#### 6.1.2 Evaluation
+
 After clustering, the accuracy of each compressed model is evaluated, and the results are aggregated across all specified model seeds and cluster sizes.
 
 ```bash
@@ -252,8 +267,9 @@ python src/compute_cluster_accuracy.py --dataset cifar10 --model resnet18_poly -
   └──accuracy_cluster_summary_degree_2_clip_2_pbit_10_zeta_0.001_sigma_<sigma>_mode_full.log
   ```
 
-
 ### 6.2 Slice-wise Clustering
+
+#### 6.2.1 Clustering
 
 In this mode, clustering is applied independently across kernel-width slices within each convolutional layer rather than globally over the entire weight tensor. The example below demonstrates slice-wise clustering executed across five independently trained models and a range of cluster sizes `k = 2` to `k = 1024`.
 
@@ -264,8 +280,6 @@ for seed in 12099 12911 18144 18573 27452; do
   done
 done
 ```
-
-Each `(seed, k)` combination represents an independent clustering experiment that can be executed in parallel across multiple GPUs or compute nodes to accelerate experimentation.
 
 **Outputs:**
 
@@ -283,6 +297,8 @@ Each `(seed, k)` combination represents an independent clustering experiment tha
   └──logs_degree_2_clip_2_pbit_10_zeta_0.001_sigma_<sigma>_seed_<seed>_slice_k_<k>.log
   ```
 
+#### 6.2.2 Evaluation
+
 After clustering, the accuracy of each compressed model is evaluated, and the results are aggregated across all specified model seeds and cluster sizes.
 
 ```bash
@@ -299,11 +315,13 @@ python src/compute_cluster_accuracy.py --dataset cifar10 --model resnet18_poly -
   ```
 
 
-## 7. Ensemble Model Clustering
+## 7️⃣ Ensemble Model Clustering
 
-### Multi-Model Clustering
+This stage performs joint clustering of convolutional parameters across an ensemble of polynomial networks using *multi-dimensional K-means*. 
 
-This stage performs joint clustering of convolutional parameters across an ensemble of polynomial networks using *multi-dimensional K-means*. The example below demonstrates clustering for two ensemble configurations with 2 and 4 models over a range of cluster sizes (`k = 64` to `k = 8192`). Each experiment corresponding to a specific cluster size and ensemble configuration can be executed in parallel across multiple GPUs or compute nodes to accelerate clustering and evaluation.
+### 7.1 Clustering
+
+The example below demonstrates clustering for two ensemble configurations with 2 and 4 models over a range of cluster sizes (`k = 64` to `k = 8192`).
 
 ```bash
 for k in 64 128 256 512 1024 2048 4096 8192; do
@@ -331,7 +349,7 @@ done
   └──logs_degree_2_clip_2_pbit_10_zeta_0.001_sigma_<sigma>_slice_k_<k>_ens_<num_models>.log
   ```
 
-### Evaluation
+### 7.2 Evaluation
 
 This step evaluates each ensemble configuration after clustering. Results are aggregated across all specified ensemble sizes and cluster counts.
 
@@ -350,7 +368,7 @@ done
   └──accuracy_ensemble_cluster_summary_degree_2_clip_2_pbit_10_zeta_0.001_sigma_<sigma>_k_<k>.log
   ```
 
-## 8. Comprehensive Results Summary
+## 8️⃣ Comprehensive Results Summary
 
 This step generates a structured summary combining all experiment phases:
 
@@ -369,7 +387,7 @@ python src/summary.py --dataset cifar10 --model resnet18
 
 # 📁 Process Files for C++ Inference
 
-## 1. Best Model Extraction
+## 1️⃣ Best Model Extraction
 
 This step parses accuracy and ensemble logs to identify and index the best-performing model checkpoints from previous experiments. It compiles structured JSON files containing paths and configuration details for each best model, enabling easy reference for downstream analysis.
 
@@ -396,7 +414,7 @@ python src/extract_best_models.py --dataset cifar10 --model resnet18
   └──ensemble_ed_clustering.json
   ```
 
-## 2. Generate JSON Templates for C++ Integration
+## 2️⃣ Generate JSON Templates for C++ Integration
 
 This step launches two subprocesses to produce deployable JSON templates. It reads best model mappings and calls `create_model_template.py` for each checkpoint. It also scans cached dataset files and calls `create_dataset_template.py` to export dataset samples.
 
@@ -438,8 +456,8 @@ python src/create_all_jsons.py --dataset cifar10 --model resnet18 --workers 10
   └──<cached_file_basename>.json
   ```
 
-## 3. Organize JSONs for C++ Inference
-This step consolidates all generated model JSON templates and dataset JSON templates into a unified directory structure expected by the C++ inference runtime. Run the script with the same dataset and model configuration used throughout the experiment workflow:
+## 3️⃣ Organize JSONs for C++ Inference
+This step consolidates all generated model JSON templates and dataset JSON templates into a unified directory structure expected by the C++ inference runtime.
 
 ```bash 
 bash src/organize_jsons_for_inference.sh cifar10 resnet18
