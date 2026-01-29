@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-PROJECT="PAPER-Models-and-Datasets"
+PROJECT="PAPER_Models_and_Datasets"
 VERSION="1.0"
 DIRECTORY="reproducibility"
 
