@@ -5,7 +5,7 @@ PROJECT="PAPER-Models-and-Datasets"
 VERSION="1.0"
 DIRECTORY="reproducibility"
 
-curl -fLO "https://github.com/educhielle/PAPER-Models-and-Datasets/archive/refs/tags/${VERSION}.zip"
+curl -fLO "https://github.com/anonymous-usenix26/PAPER_Models_and_Datasets/archive/refs/tags/${VERSION}.zip"
 7z x "${VERSION}.zip"
 rm "${VERSION}.zip"
 
