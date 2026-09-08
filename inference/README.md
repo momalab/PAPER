@@ -13,7 +13,7 @@ It may work with older versions or other environments, but these have not been v
 | Dependency    | Minimum Version |
 | ------------- | --------------- |
 | Make          | 4.3             |
-| CMake         | 3.22.1          |
+| CMake         | 3.31.12         |
 | Git           | 2.34.1          |
 | GNU C/C++     | C++17           |
 | GMP           | 6.2.1           |
@@ -26,7 +26,7 @@ It may work with older versions or other environments, but these have not been v
 To install the required packages on Ubuntu:
 
 ```bash
-sudo apt install make cmake git gcc g++ libgmp-dev nlohmann-json3-dev python3 python3-numpy p7zip-full curl
+sudo apt install make git gcc g++ libgmp-dev nlohmann-json3-dev python3 python3-numpy p7zip-full curl
 ```
 
 ### Microsoft SEAL Library
@@ -36,6 +36,7 @@ To install it, run:
 
 ```bash
 cd third-party
+bash install_cmake.sh
 bash install_seal.sh
 ```
 
