@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-PROJECT="PAPER_Models_and_Datasets"
+PROJECT="PAPER-Models-and-Datasets"
 VERSION="1.0"
 DIRECTORY="reproducibility"
 
-curl -fLO "https://github.com/momalab/PAPER-Models-and-Datasets/archive/refs/tags/${VERSION}.zip"
+curl -fLO "https://github.com/momalab/${PROJECT}/archive/refs/tags/${VERSION}.zip"
 7z x "${VERSION}.zip"
 rm "${VERSION}.zip"
 
