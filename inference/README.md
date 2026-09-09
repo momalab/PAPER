@@ -13,7 +13,7 @@ It may work with older versions or other environments, but these have not been v
 | Dependency    | Minimum Version |
 | ------------- | --------------- |
 | Make          | 4.3             |
-| CMake         | 3.31.12         |
+| CMake         | 3.22.1          |
 | Git           | 2.34.1          |
 | GNU C/C++     | C++17           |
 | GMP           | 6.2.1           |
