@@ -31,8 +31,8 @@ sudo apt install make git gcc g++ libgmp-dev nlohmann-json3-dev python3 python3-
 
 ### Microsoft SEAL Library
 
-PAPER requires the **Microsoft SEAL** library (version 4.1).
-To install it, run:
+PAPER requires the **Microsoft SEAL** library (version 4.1), which requires CMake < 4.
+To install them, run:
 
 ```bash
 cd third-party
